@@ -22,7 +22,7 @@ public class Block extends GameObject{
 
 
 	public void render(Graphics g) {
-		g.setColor(Color.white);
+		g.setColor(Color.gray);
 		g.fillRect((int)x, (int)y, width, height);
 		
 	}
