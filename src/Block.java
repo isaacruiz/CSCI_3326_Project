@@ -8,7 +8,7 @@ import java.util.LinkedList;
 
 public class Block extends GameObject{
 
-	int width = 64;
+	int width = 100;
 	int height = 16;
 	
 	public Block(float x, float y, ObjectId id) {

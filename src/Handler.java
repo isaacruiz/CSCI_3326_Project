@@ -41,8 +41,9 @@ public class Handler {
 
 		addObject(new Block(100, Game.HEIGHT - 32, ObjectId.Block));
 
-		addObject(new Block(0, 600, ObjectId.Block));
-
+		for (int i = 0; i < 1000; i+=100){
+			addObject(new Block(i, 600, ObjectId.Block));
+		}
 		addObject(new Block(100, 300, ObjectId.Block));
 
 		addObject(new Block(150, 300, ObjectId.Block));

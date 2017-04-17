@@ -12,8 +12,9 @@ public class Player extends GameObject {
 	protected Color color = Color.green;
 	private float gravity = 0.5f;
 	private final float MAX_SPEED = 10;
-	private boolean moveLeft = false;
-	private boolean moveRight = false;
+	private boolean moveLeft;
+	private boolean moveRight;
+	private float moveSpeed;
 	
 	private Handler handler;
 	
@@ -21,6 +22,9 @@ public class Player extends GameObject {
 	public Player(float x, float y, Handler handler, ObjectId id) {
 		super(x, y, id);
 		this.handler = handler;
+		moveSpeed = 5;
+		moveLeft = false;
+		moveRight = false;
 		
 	}
 
@@ -39,10 +43,18 @@ public class Player extends GameObject {
 		Collision(object);
 	}
 
+	public boolean isMoveLeft(){
+		return moveLeft;
+	}
+	
+	public boolean isMoveRight(){
+		return moveRight;
+	}
+	
 	public void setMoveLeft(boolean moveLeft) {
 		this.moveLeft = moveLeft;
 		if(moveLeft)
-			velX = -5;
+			velX = -1 * moveSpeed;
 		
 		else
 			velX = 0;
@@ -54,7 +66,7 @@ public class Player extends GameObject {
 		this.moveRight = moveRight;
 		
 		if(moveRight)
-			velX = 5;
+			velX = moveSpeed;
 		else
 			velX = 0;
 	}
@@ -133,10 +145,10 @@ public class Player extends GameObject {
 		
 		Graphics2D g2d = (Graphics2D) g;
 		g.setColor(Color.red);
-		//g2d.draw(getBounds());
-		//g2d.draw(getBoundsRight());
-		//g2d.draw(getBoundsLeft());
-		//g2d.draw(getBoundsTop());
+		g2d.draw(getBounds());
+		g2d.draw(getBoundsRight());
+		g2d.draw(getBoundsLeft());
+		g2d.draw(getBoundsTop());
 		
 	}
 	
