@@ -12,6 +12,8 @@ public class Player extends GameObject {
 	protected Color color = Color.green;
 	private float gravity = 0.5f;
 	private final float MAX_SPEED = 10;
+	private boolean moveLeft = false;
+	private boolean moveRight = false;
 	
 	private Handler handler;
 	
@@ -36,7 +38,27 @@ public class Player extends GameObject {
 		
 		Collision(object);
 	}
-	
+
+	public void setMoveLeft(boolean moveLeft) {
+		this.moveLeft = moveLeft;
+		if(moveLeft)
+			velX = -5;
+		
+		else
+			velX = 0;
+	}
+
+
+	public void setMoveRight(boolean moveRight) {
+		
+		this.moveRight = moveRight;
+		
+		if(moveRight)
+			velX = 5;
+		else
+			velX = 0;
+	}
+
 	private void Collision(LinkedList<GameObject> object) {
 		for (int i = 0; i < handler.object.size(); i++) {
 			GameObject tempObject = handler.object.get(i);
