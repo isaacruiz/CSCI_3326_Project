@@ -1,6 +1,7 @@
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import java.util.Random;
 
@@ -16,7 +17,7 @@ public class Game extends Canvas implements Runnable{
 	
 	//Object
 	Handler handler;
-	
+	Camera camera;
 	
 	private void init(){
 		
@@ -24,10 +25,11 @@ public class Game extends Canvas implements Runnable{
 		HEIGHT = getHeight();
 		
 		handler = new Handler();
+		camera = new Camera(0,0);
 		
 		
 		handler.createLevel();
-		handler.addObject(new Player(100, 100, handler, ObjectId.Player));
+		handler.addObject(new Player(100, 100, handler, camera, ObjectId.Player));
 
 		handler.addObject(new Projectile(20, 500, ObjectId.Projectile));
 		
@@ -88,12 +90,14 @@ public class Game extends Canvas implements Runnable{
 		}
 		
 		Graphics g = bs.getDrawGraphics();
+		Graphics2D g2d = (Graphics2D)g;
 		/////////////////Draw here/////////////////
 		g.setColor(Color.black);
 		g.fillRect(0, 0, getWidth(), getHeight());
 		
+		g2d.translate(camera.getX(), camera.getY());
 		handler.render(g);
-		
+		g2d.translate(-camera.getX(), -camera.getY());
 		/////////////////////////////////
 		
 		g.dispose();

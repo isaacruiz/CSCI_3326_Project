@@ -16,7 +16,6 @@ public class Handler {
 	public void tick(){
 		for(int i = 0; i <object.size();i++){
 			tempObject = object.get(i);
-			
 			tempObject.tick(object);
 		}
 	}
@@ -44,14 +43,17 @@ public class Handler {
 		for (int i = 0; i < 1000; i+=100){
 			addObject(new Block(i, 600, ObjectId.Block));
 		}
+		for(int i = 600; i > 500; i-=16){
+			addObject(new Block(100, i, ObjectId.Block));
+		}
 		addObject(new Block(100, 300, ObjectId.Block));
 
 		addObject(new Block(150, 300, ObjectId.Block));
 		
 		addObject(new PlatformA(400, 400, Color.yellow, ObjectId.PlatformA));
-		
+		addObject(new PlatformA(600, 570, Color.yellow, ObjectId.PlatformA));
 		addObject(new PlatformA(600, 400, Color.green, ObjectId.PlatformA));
-		
+		addObject(new PlatformA(400, 570, Color.green, ObjectId.PlatformA));
 		addObject(new Block(400, 500, ObjectId.Block));
 	}
 }

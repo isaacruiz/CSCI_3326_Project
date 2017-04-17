@@ -26,7 +26,14 @@ public class Block extends GameObject{
 		g.fillRect((int)x, (int)y, width, height);
 		
 	}
+	
+	public int getWidth(){
+		return width;
+	}
 
+	public int getHeight(){
+		return height;
+	}
 
 	public Rectangle getBounds() {
 		

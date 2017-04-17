@@ -6,11 +6,12 @@ import java.awt.Rectangle;
 import java.util.LinkedList;
 
 
-
 public class PlatformA extends GameObject {
 
 	protected Color color = Color.blue;
 	protected int toggle = 0;
+	private int width = 100;
+	private int height = 32;
 	
 	public PlatformA(float x, float y, Color color, ObjectId id) {
 		super(x, y, id);
@@ -24,7 +25,7 @@ public class PlatformA extends GameObject {
 
 	public void render(Graphics g) {
 		g.setColor(color);
-		g.fillRect((int) x, (int) y, 100, 32);
+		g.fillRect((int) x, (int) y, width, height);
 
 	}
 
@@ -37,6 +38,14 @@ public class PlatformA extends GameObject {
 				color = Color.green;
 		}
 		
+	}
+	
+	public int getWidth(){
+		return width;
+	}
+	
+	public int getHeight(){
+		return height;
 	}
 	public Color getColor(){
 		return color;

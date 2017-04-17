@@ -15,16 +15,18 @@ public class Player extends GameObject {
 	private boolean moveLeft;
 	private boolean moveRight;
 	private float moveSpeed;
+	private Camera camera;
 	
 	private Handler handler;
 	
 	
-	public Player(float x, float y, Handler handler, ObjectId id) {
+	public Player(float x, float y, Handler handler, Camera camera, ObjectId id) {
 		super(x, y, id);
 		this.handler = handler;
 		moveSpeed = 5;
 		moveLeft = false;
 		moveRight = false;
+		this.camera = camera;
 		
 	}
 
@@ -39,7 +41,9 @@ public class Player extends GameObject {
 				velY = MAX_SPEED;
 			}
 		}
-		
+		System.out.print("x: " + x);
+		System.out.println(" y: " + y);
+		camera.tick(this);
 		Collision(object);
 	}
 
@@ -50,7 +54,6 @@ public class Player extends GameObject {
 	public boolean isMoveRight(){
 		return moveRight;
 	}
-	
 	public void setMoveLeft(boolean moveLeft) {
 		this.moveLeft = moveLeft;
 		if(moveLeft)
@@ -76,6 +79,8 @@ public class Player extends GameObject {
 			GameObject tempObject = handler.object.get(i);
 
 			if (tempObject.getId() == ObjectId.Block) {
+				
+				Block b = (Block)tempObject;
 
 				// Bottom Collision
 				if (getBounds().intersects(tempObject.getBounds())) {
@@ -88,13 +93,13 @@ public class Player extends GameObject {
 
 				// Top Collision
 				if (getBoundsTop().intersects(tempObject.getBounds())) {
-					y = tempObject.getY() + 32;
+					y = tempObject.getY() + b.getHeight();
 					velY = 0;
 				}
 
 				// Left Collision
 				if (getBoundsLeft().intersects(tempObject.getBounds())) {
-					x = tempObject.getX() + 32;
+					x = tempObject.getX() + b.getWidth();
 				}
 
 				// Right Collision
@@ -120,13 +125,13 @@ public class Player extends GameObject {
 
 					// Top Collision
 					if (getBoundsTop().intersects(tempObject.getBounds())) {
-						y = tempObject.getY() + 32;
+						y = tempObject.getY() + plat.getHeight();
 						velY = 0;
 					}
 
 					// Left Collision
 					if (getBoundsLeft().intersects(tempObject.getBounds())) {
-						x = tempObject.getX() + 32;
+						x = tempObject.getX() + plat.getWidth();
 					}
 
 					// Right Collision
@@ -143,12 +148,12 @@ public class Player extends GameObject {
 		g.setColor(color);
 		g.fillRect((int)x, (int)y, (int)width, (int)height);
 		
-		Graphics2D g2d = (Graphics2D) g;
-		g.setColor(Color.red);
-		g2d.draw(getBounds());
-		g2d.draw(getBoundsRight());
-		g2d.draw(getBoundsLeft());
-		g2d.draw(getBoundsTop());
+		//Graphics2D g2d = (Graphics2D) g;
+		//g.setColor(Color.red);
+		//g2d.draw(getBounds());
+		//g2d.draw(getBoundsRight());
+		//g2d.draw(getBoundsLeft());
+		//g2d.draw(getBoundsTop());
 		
 	}
 	
@@ -160,19 +165,19 @@ public class Player extends GameObject {
 	}
 
 	public Rectangle getBounds() {
-		return new Rectangle((int)(x+(width/2)-((width/2)/2)), (int)((int)y+(height/2)), (int)width/2, (int)height/2);
+		return new Rectangle((int)(x + width/4), (int)(y + height * 7/8), (int)width/2, (int)height/8);
 	}
 	
 	public Rectangle getBoundsTop() {
-		return new Rectangle((int)((int)x+(width/2)-((width/2)/2)), (int)y, (int)width/2, (int)height/2);
+		return new Rectangle((int)(x + width/4), (int)y, (int)width/2, (int)height/8);
 	}
 	
 	public Rectangle getBoundsRight() {
-		return new Rectangle((int)((int)x+width-5), (int)y+5, (int)5, (int)height-10);
+		return new Rectangle((int)(x + width - 5), (int)y + 5, (int)5, (int)height - 10);
 	}
 	
 	public Rectangle getBoundsLeft() {
-		return new Rectangle((int)x, (int)y+5, (int)5, (int)height-10);
+		return new Rectangle((int)x, (int)y + 5, (int)5, (int)height - 10);
 	}
 	
 	

@@ -26,12 +26,9 @@ public class KeyInput extends KeyAdapter {
 						tempObject.setJumping(true);
 						tempObject.setVelY(-10);
 				}
-				
-				
-				if(key == KeyEvent.VK_E) p.toggleColor();
-				
-			}
-			
+						
+				if(key == KeyEvent.VK_E) p.toggleColor();	
+			}	
 		}
 		
 		if(key == KeyEvent.VK_ESCAPE){
