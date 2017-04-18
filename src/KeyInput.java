@@ -27,7 +27,7 @@ public class KeyInput extends KeyAdapter {
 						tempObject.setVelY(-10);
 				}
 						
-				if(key == KeyEvent.VK_E) p.toggleColor();	
+				if(key == KeyEvent.VK_W) p.toggleColor();	
 			}	
 		}
 		

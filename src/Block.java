@@ -8,8 +8,8 @@ import java.util.LinkedList;
 
 public class Block extends GameObject{
 
-	int width = 100;
-	int height = 16;
+	int width = 32;
+	int height = 32;
 	
 	public Block(float x, float y, ObjectId id) {
 		super(x, y, id);
@@ -24,7 +24,10 @@ public class Block extends GameObject{
 	public void render(Graphics g) {
 		g.setColor(Color.gray);
 		g.fillRect((int)x, (int)y, width, height);
-		
+		g.setColor(Color.black);
+		g.drawLine((int) x,  (int) y,  (int)x + width, (int)y + height);
+		g.drawLine((int) x,  (int) y + height,  (int)x + width, (int)y);
+		g.drawRect((int)x, (int)y, width, height);
 	}
 	
 	public int getWidth(){

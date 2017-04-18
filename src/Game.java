@@ -19,19 +19,18 @@ public class Game extends Canvas implements Runnable{
 	Handler handler;
 	Camera camera;
 	
-	private void init(){
+	public void init(){
 		
 		WIDTH = getWidth();
 		HEIGHT = getHeight();
-		
-		handler = new Handler();
+		handler = new Handler(this);
 		camera = new Camera(0,0);
 		
 		
 		handler.createLevel();
 		handler.addObject(new Player(100, 100, handler, camera, ObjectId.Player));
 
-		handler.addObject(new Projectile(20, 500, ObjectId.Projectile));
+		handler.addObject(new Projectile(100, 400, 5, -15, ObjectId.Projectile));
 		
 		this.addKeyListener(new KeyInput(handler));
 	}
@@ -71,7 +70,7 @@ public class Game extends Canvas implements Runnable{
 					
 			if(System.currentTimeMillis() - timer > 1000){
 				timer += 1000;
-				System.out.println("FPS: " + frames + " TICKS: " + updates);
+				//System.out.println("FPS: " + frames + " TICKS: " + updates);
 				frames = 0;
 				updates = 0;
 			}
@@ -95,7 +94,7 @@ public class Game extends Canvas implements Runnable{
 		g.setColor(Color.black);
 		g.fillRect(0, 0, getWidth(), getHeight());
 		
-		//g2d.translate(camera.getX(), camera.getY());
+		g2d.translate(camera.getX(), camera.getY());
 		handler.render(g);
 		//g2d.translate(-camera.getX(), -camera.getY());
 		/////////////////////////////////

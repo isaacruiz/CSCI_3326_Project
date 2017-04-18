@@ -1,6 +1,7 @@
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.util.LinkedList;
 
@@ -8,12 +9,13 @@ import java.util.LinkedList;
 
 public class Projectile extends GameObject{
 
-	float gravity = 0.4f;
+	float gravity = 0.5f;
+	int diameter = 20;
 	
-	public Projectile(float x, float y, ObjectId id) {
+	public Projectile(float x, float y, float velX, float velY, ObjectId id) {
 		super(x, y, id);
-		velX = 5;
-		velY = -20;
+		this.velX = velX;
+		this.velY = velY;
 		
 		
 	}
@@ -22,7 +24,7 @@ public class Projectile extends GameObject{
 	public void tick(LinkedList<GameObject> object) {
 
 		y += velY;
-		x+= velX;
+		x += velX;
 		
 		if (falling)
 			velY += gravity;
@@ -32,15 +34,16 @@ public class Projectile extends GameObject{
 
 	@Override
 	public void render(Graphics g) {
+		Graphics2D g2d = (Graphics2D)g;
 		g.setColor(Color.red);
-		g.fillOval((int)x, (int)y, 10, 10);
-		
+		g.fillOval((int)x, (int)y, (int)diameter, (int)diameter);
+		g2d.draw(getBounds());
 	}
 
 	@Override
 	public Rectangle getBounds() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return new Rectangle((int)(x), (int)(y), diameter, diameter);
 	}
 	
 }

@@ -2,6 +2,8 @@ import java.awt.Image;
 import javax.imageio.*;
 public class Background {
 
+
+	
 	public Background(){
 		try{
 			

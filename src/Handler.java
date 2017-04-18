@@ -12,11 +12,19 @@ public class Handler {
 	public LinkedList<GameObject> object = new LinkedList<GameObject>();
 	
 	private GameObject tempObject;
-	
+	private Game game;
+	public Handler(Game game){
+		this.game = game;
+	}
 	public void tick(){
 		for(int i = 0; i <object.size();i++){
 			tempObject = object.get(i);
 			tempObject.tick(object);
+			if(tempObject.getId() == ObjectId.Player){
+				
+				if(((Player)tempObject).isDead())
+					game.init();
+			}
 		}
 	}
 	
@@ -36,24 +44,19 @@ public class Handler {
 	}
 		
 	public void createLevel() {
-		addObject(new Block(0, 200, ObjectId.Block));
-
-		addObject(new Block(100, Game.HEIGHT - 32, ObjectId.Block));
-
-		for (int i = 0; i < 1000; i+=100){
-			addObject(new Block(i, 600, ObjectId.Block));
-		}
-		for(int i = 600; i > 500; i-=16){
-			addObject(new Block(100, i, ObjectId.Block));
-		}
-		addObject(new Block(100, 300, ObjectId.Block));
-
-		addObject(new Block(150, 300, ObjectId.Block));
+		for(int i = 0; i < Game.WIDTH*15; i+=32)
+			addObject(new Block (i, 400, ObjectId.Block));
 		
-		addObject(new PlatformA(400, 400, Color.yellow, ObjectId.PlatformA));
-		addObject(new PlatformA(600, 570, Color.yellow, ObjectId.PlatformA));
-		addObject(new PlatformA(600, 400, Color.green, ObjectId.PlatformA));
-		addObject(new PlatformA(400, 570, Color.green, ObjectId.PlatformA));
-		addObject(new Block(400, 500, ObjectId.Block));
+		for(int i = 0; i < Game.WIDTH*15; i+= Game.WIDTH)
+			addObject(new Block (i, 100, ObjectId.Block));
+		
+		addObject(new PlatformA(200, 300, 200, 32, Color.yellow, ObjectId.PlatformA));
+		PlatformB tempPlat = new PlatformB(400, 300, 400, 32, Color.yellow, ObjectId.PlatformB);
+		tempPlat.setMovement(2, 300, 1);
+		addObject(tempPlat);
+		
+		PlatformB tempPlat2 = new PlatformB(800, 200, 400, 32, Color.yellow, ObjectId.PlatformB);
+		tempPlat2.setMovement(2, 300, 2);
+		addObject(tempPlat2);
 	}
 }
