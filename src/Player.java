@@ -148,12 +148,12 @@ public class Player extends GameObject {
 		g.setColor(color);
 		g.fillRect((int)x, (int)y, (int)width, (int)height);
 		
-		//Graphics2D g2d = (Graphics2D) g;
-		//g.setColor(Color.red);
-		//g2d.draw(getBounds());
-		//g2d.draw(getBoundsRight());
-		//g2d.draw(getBoundsLeft());
-		//g2d.draw(getBoundsTop());
+		Graphics2D g2d = (Graphics2D) g;
+		g.setColor(Color.red);
+		g2d.draw(getBounds());
+		g2d.draw(getBoundsRight());
+		g2d.draw(getBoundsLeft());
+		g2d.draw(getBoundsTop());
 		
 	}
 	
