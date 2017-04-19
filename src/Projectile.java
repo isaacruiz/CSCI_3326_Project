@@ -11,15 +11,15 @@ public class Projectile extends GameObject{
 
 	float gravity = 0.5f;
 	int diameter = 20;
+	private Color color;
 	
-	public Projectile(float x, float y, float velX, float velY, ObjectId id) {
+	public Projectile(float x, float y, float velX, float velY, Color color, ObjectId id) {
 		super(x, y, id);
 		this.velX = velX;
 		this.velY = velY;
-		
-		
+		this.color = color;
 	}
-
+	
 	@Override
 	public void tick(LinkedList<GameObject> object) {
 
@@ -35,7 +35,7 @@ public class Projectile extends GameObject{
 	@Override
 	public void render(Graphics g) {
 		Graphics2D g2d = (Graphics2D)g;
-		g.setColor(Color.red);
+		g.setColor(color);
 		g.fillOval((int)x, (int)y, (int)diameter, (int)diameter);
 		g2d.draw(getBounds());
 	}
@@ -44,6 +44,11 @@ public class Projectile extends GameObject{
 	public Rectangle getBounds() {
 		
 		return new Rectangle((int)(x), (int)(y), diameter, diameter);
+	}
+	
+	public Color getColor(){
+		
+		return color;
 	}
 	
 }

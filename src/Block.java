@@ -2,6 +2,7 @@
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.util.LinkedList;
 
@@ -28,6 +29,9 @@ public class Block extends GameObject{
 		g.drawLine((int) x,  (int) y,  (int)x + width, (int)y + height);
 		g.drawLine((int) x,  (int) y + height,  (int)x + width, (int)y);
 		g.drawRect((int)x, (int)y, width, height);
+		g.setColor(Color.red);
+		Graphics2D g2d = (Graphics2D)g;
+		g2d.draw(getBounds());
 	}
 	
 	public int getWidth(){

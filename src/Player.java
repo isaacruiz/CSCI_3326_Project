@@ -30,15 +30,15 @@ public class Player extends GameObject {
 		
 	}
 
-	public void setDeath(boolean status){
-		dead = status;
-	}
 	public boolean isDead(){
 		return dead;
 	}
 	public void tick(LinkedList<GameObject> object) {
+		camera.tick(this);
 		x += velX;
 		y += velY;
+		if (y > 800)
+			dead = true;
 		
 		if(falling || jumping){
 			velY += gravity;
@@ -47,8 +47,9 @@ public class Player extends GameObject {
 				velY = MAX_SPEED;
 			}
 		}
-		camera.tick(this);
+		
 		Collision(object);
+		
 	}
 
 	public boolean isMoveLeft(){
@@ -79,117 +80,23 @@ public class Player extends GameObject {
 	}
 
 	private void Collision(LinkedList<GameObject> object) {
+		
 		for (int i = 0; i < handler.object.size(); i++) {
 			GameObject tempObject = handler.object.get(i);
 
-			if (tempObject.getId() == ObjectId.Block) {
-				
-				Block b = (Block)tempObject;
-
-				// Bottom Collision
-				if (getBounds().intersects(tempObject.getBounds())) {
-					y = tempObject.getY() - height;
-					velY = 0;
-					falling = false;
-					jumping = false;
-				} else
-					falling = true;
-
-				// Top Collision
-				if (getBoundsTop().intersects(tempObject.getBounds())) {
-					y = tempObject.getY() + b.getHeight();
-					velY = 0;
-				}
-
-				// Left Collision
-				if (getBoundsLeft().intersects(tempObject.getBounds())) {
-					x = tempObject.getX() + b.getWidth();
-				}
-
-				// Right Collision
-				if (getBoundsRight().intersects(tempObject.getBounds())) {
-					x = tempObject.getX() - width;
-				}
-			}
+			if (tempObject.getId() == ObjectId.Block)
+				collisionBlock(tempObject);
 
 			//Contact with static platform
-			if (tempObject.getId() == ObjectId.PlatformA) {
-
-				PlatformA plat = (PlatformA) tempObject;
-
-				if (!color.equals(plat.getColor())) {
-
-					// Bottom Collision
-					if (getBounds().intersects(tempObject.getBounds())) {
-						y = tempObject.getY() - height;
-						velY = 0;
-						falling = false;
-						jumping = false;
-					} else
-						falling = true;
-
-					// Top Collision
-					if (getBoundsTop().intersects(tempObject.getBounds())) {
-						y = tempObject.getY() + plat.getHeight();
-						velY = 0;
-					}
-
-					// Left Collision
-					if (getBoundsLeft().intersects(tempObject.getBounds())) {
-						x = tempObject.getX() + plat.getWidth();
-					}
-
-					// Right Collision
-					if (getBoundsRight().intersects(tempObject.getBounds())) {
-						x = tempObject.getX() - width;
-					}
-				}
-			}
-			//Contact with moving platform
-			if (tempObject.getId() == ObjectId.PlatformB) {
-
-				PlatformB plat = (PlatformB) tempObject;
-
-				if (!color.equals(plat.getColor())) {
-
-					// Bottom Collision
-					
-					if (getBounds().intersects(tempObject.getBounds())) {
-						dead = true;
-						y = tempObject.getY() - height;
-						if(moveRight){
-							velX = plat.velX + moveSpeed;
-						}
-						else if(moveLeft){
-							velX = plat.velX - moveSpeed;
-						}
-						else
-							velX = plat.velX;
-						falling = false;
-						jumping = false;
-						System.out.println("VelX: " + velX);
-					} else
-						falling = true;
-
-					// Top Collision
-					if (getBoundsTop().intersects(tempObject.getBounds())) {
-						y = tempObject.getY() + plat.getHeight();
-						velY = 0;
-					}
-
-					// Left Collision
-					if (getBoundsLeft().intersects(tempObject.getBounds())) {
-						x = tempObject.getX() + plat.getWidth();
-					}
-
-					// Right Collision
-					if (getBoundsRight().intersects(tempObject.getBounds())) {
-						x = tempObject.getX() - width;
-					}
-				}
-			}
+			if (tempObject.getId() == ObjectId.PlatformA)
+				collisionPlatformA(tempObject);
 			
-
+			//Contact with moving platform
+			if (tempObject.getId() == ObjectId.PlatformB)
+				collisionPlatformB(tempObject);
+			
+			if(tempObject.getId() == ObjectId.Projectile)
+				collisionProjectile(tempObject);
 		}
 	}
 
@@ -198,13 +105,13 @@ public class Player extends GameObject {
 		g.fillRect((int)x, (int)y, (int)width, (int)height);
 		
 		//Draw collision boxes
-//		Graphics2D g2d = (Graphics2D) g;
-//		g.setColor(Color.red);
-//		g2d.draw(getBounds());
-//		g2d.draw(getBoundsRight());
-//		g2d.draw(getBoundsLeft());
-//		g2d.draw(getBoundsTop());
-		
+		Graphics2D g2d = (Graphics2D) g;
+		g.setColor(Color.red);
+		g2d.draw(getBoundsBottom());
+		g2d.draw(getBoundsRight());
+		g2d.draw(getBoundsLeft());
+		g2d.draw(getBoundsTop());
+		g2d.draw(getBounds());		
 	}
 	
 	public void toggleColor(){
@@ -214,8 +121,9 @@ public class Player extends GameObject {
 			color = Color.green;
 	}
 
-	public Rectangle getBounds() {
-		return new Rectangle((int)(x + width/4), (int)(y + height * 7/8), (int)width/2, (int)height/8);
+	public Rectangle getBoundsBottom() {
+		//return new Rectangle((int)(x + width/4), (int)(y + height * 7/8), (int)width/2, (int)height/8);
+		return new Rectangle((int)((int)x+(width/2)-((width/2)/2)), (int)((int)y+(height/2)), (int)width/2, (int)height/2);
 	}
 	
 	public Rectangle getBoundsTop() {
@@ -229,7 +137,121 @@ public class Player extends GameObject {
 	public Rectangle getBoundsLeft() {
 		return new Rectangle((int)x, (int)y + 5, (int)5, (int)height - 10);
 	}
+	public Rectangle getBounds(){
+		return new Rectangle((int)x, (int)y, (int)(width), (int)(height));
+		
+	}
 	
-	
+	private void collisionBlock(GameObject tempObject){
+		Block b = (Block)tempObject;
 
+		// Bottom Collision
+		if (getBoundsBottom().intersects(tempObject.getBounds())) {
+			y = tempObject.getY() - height;
+			velY = 0;
+			falling = false;
+			jumping = false;
+		} else
+			falling = true;
+
+		// Top Collision
+		if (getBoundsTop().intersects(tempObject.getBounds())) {
+			y = tempObject.getY() + b.getHeight();
+			velY = 0;
+		}
+
+		// Left Collision
+		if (getBoundsLeft().intersects(tempObject.getBounds())) {
+			x = tempObject.getX() + b.getWidth();
+		}
+
+		// Right Collision
+		if (getBoundsRight().intersects(tempObject.getBounds())) {
+			x = tempObject.getX() - width;
+		}
+	}
+	
+	private void collisionPlatformA(GameObject tempObject){
+		PlatformA plat = (PlatformA) tempObject;
+
+		if (!color.equals(plat.getColor())) {
+
+			// Bottom Collision
+			if (getBoundsBottom().intersects(tempObject.getBounds())) {
+				y = tempObject.getY() - height;
+				velY = 0;
+				falling = false;
+				jumping = false;
+			} else
+				falling = true;
+
+			// Top Collision
+			if (getBoundsTop().intersects(tempObject.getBounds())) {
+				y = tempObject.getY() + plat.getHeight();
+				velY = 0;
+			}
+
+			// Left Collision
+			if (getBoundsLeft().intersects(tempObject.getBounds())) {
+				x = tempObject.getX() + plat.getWidth();
+			}
+
+			// Right Collision
+			if (getBoundsRight().intersects(tempObject.getBounds())) {
+				x = tempObject.getX() - width;
+			}
+		}
+
+	}
+	
+	private void collisionPlatformB(GameObject tempObject){
+		PlatformB plat = (PlatformB) tempObject;
+
+		if (!color.equals(plat.getColor())) {
+
+			// Bottom Collision
+			
+			if (getBoundsBottom().intersects(tempObject.getBounds())) {
+				y = tempObject.getY() - height;
+				if(moveRight){
+					velX = plat.velX + moveSpeed;
+				}
+				else if(moveLeft){
+					velX = plat.velX - moveSpeed;
+				}
+				else
+					velX = plat.velX;
+				falling = false;
+				jumping = false;
+				System.out.println("VelX: " + velX);
+			} else
+				falling = true;
+
+			// Top Collision
+			if (getBoundsTop().intersects(tempObject.getBounds())) {
+				y = tempObject.getY() + plat.getHeight();
+				velY = 0;
+			}
+
+			// Left Collision
+			if (getBoundsLeft().intersects(tempObject.getBounds())) {
+				x = tempObject.getX() + plat.getWidth();
+			}
+
+			// Right Collision
+			if (getBoundsRight().intersects(tempObject.getBounds())) {
+				x = tempObject.getX() - width;
+			}
+		}
+	}
+	
+	private void collisionProjectile(GameObject tempObject){
+		Projectile proj = (Projectile)tempObject;
+
+		if (color.equals(proj.getColor()) && getBounds().intersects(proj.getBounds())) {
+
+			dead = true;
+			
+		}
+	}
 }
