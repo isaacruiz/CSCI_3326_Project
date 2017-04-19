@@ -18,46 +18,33 @@ public class Enemy extends GameObject{
 	int counter = 0;
 	Random rand = new Random();
 	
-	public Enemy(float x, float y, Handler handler, int initColor, boolean colorChange, ObjectId id) {
+	public Enemy(float x, float y, Handler handler, Color color, boolean colorChange, ObjectId id) {
 		super(x, y, id);
 		this.handler = handler;
 		dynamicColor = colorChange;
 		
 		fireRate = rand.nextInt(10) + 60;
-		
-		switch(initColor){
-		
-		case 1:
-			color = Color.yellow;
-			break;
-		
-		case 2:
-			color = Color.green;
-			break;
-		
-		default:
-			color = Color.red;
-			break;
-		}
+		this.color = color;
 	}
 
 	@Override
 	public void tick(LinkedList<GameObject> object) {
-		int vpx = rand.nextInt(41) - 20;
-		int vpy = -1 * (rand.nextInt(10) + 7);
-		
-		
+		int vpx = rand.nextInt(30) - 20;
+		int vpy = -1 * (rand.nextInt(20) + 7);
 		
 		if(dynamicColor){
 			toggleColor();
 			toggle++;
-		
-			if(counter % fireRate == 0)
-				handler.addObject(new Projectile(x,y, vpx, vpy, color, ObjectId.Projectile));
-			counter++;
 		}
+		//shoots projectile every firerate no of updates
+		//(eg. fireRate = 60 and updates ~ 60/second so firerate = 1/second
+			if(counter % fireRate == 0)  
+				handler.addObject(new Projectile(x,y, vpx, vpy, color, ObjectId.Projectile));
+			
+			counter++;
+		
 	}
-	private void toggleColor(){
+	protected void toggleColor(){
 		if(toggle % 80 == 0){
 			if(color == Color.green)
 				color = Color.yellow;
@@ -79,6 +66,10 @@ public class Enemy extends GameObject{
 	public Rectangle getBounds() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public void setFireRate(int fr){
+		fireRate = fr;
 	}
 
 }

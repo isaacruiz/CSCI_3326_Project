@@ -16,14 +16,14 @@ public class PlatformB extends GameObject {
 	private float centerY;
 	private boolean dynamicColor = false;
 	
-	public PlatformB(float x, float y, float width, float height, Color color, boolean dc, ObjectId id) {
+	public PlatformB(float x, float y, float width, float height, Color color, ObjectId id) {
 		super(x, y, id);
 		this.color = color;
 		this.width = width;
 		this.height = height;
 		centerX = x + width/2;
 		centerY = y + width/2;
-		dynamicColor = dc;
+
 		velX = 0;
 		velY = 0;
 		toggle = 0;
@@ -59,6 +59,9 @@ public class PlatformB extends GameObject {
 				color = Color.green;
 		}
 		
+	}
+	public void setDynamicColor(boolean c){
+		dynamicColor = c;
 	}
 	public void setMovement(float vel, float radius, int option){
 		

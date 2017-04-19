@@ -21,13 +21,21 @@ public class Handler {
 	public void tick(){
 		for(int i = 0; i <object.size();i++){
 			tempObject = object.get(i);
-			tempObject.tick(object);
+			
 			
 			if(tempObject.getId() == ObjectId.Player){
-				
 				if(((Player)tempObject).isDead())
 					game.init();
 			}
+			
+			if(tempObject.getId() == ObjectId.Projectile){
+				if(((Projectile)tempObject).getY() > 1000)
+					removeObject(tempObject);
+			}
+			
+			tempObject.tick(object);
+			
+		
 		}
 	}
 	
@@ -46,30 +54,4 @@ public class Handler {
 		this.object.remove(object);
 	}
 		
-	public void createLevel() {
-		for(int i = 0; i < Game.WIDTH*3; i+=32)
-			addObject(new Block (i, 400, ObjectId.Block));
-		
-		for(int i = 0; i < Game.WIDTH*15; i+= Game.WIDTH)
-			addObject(new Block (i, 100, ObjectId.Block));
-		
-		addObject(new PlatformA(200, 300, 200, 32, Color.yellow, ObjectId.PlatformA));
-		PlatformB tempPlat = new PlatformB(400, 300, 400, 32, Color.yellow, true, ObjectId.PlatformB);
-		tempPlat.setMovement(2, 300, 1);
-		addObject(tempPlat);
-		
-		PlatformB tempPlat2 = new PlatformB(800, 200, 400, 32, Color.yellow, true, ObjectId.PlatformB);
-		tempPlat2.setMovement(2, 300, 2);
-		addObject(tempPlat2);
-		
-		PlatformB tempPlat3 = new PlatformB(1600, 300, 400, 32, Color.gray, false, ObjectId.PlatformB);
-		tempPlat3.setMovement(2, 300, 1);
-		addObject(tempPlat3);
-		
-		PlatformB tempPlat4 = new PlatformB(1600, 300, 400, 32, Color.gray, false, ObjectId.PlatformB);
-		tempPlat4.setMovement(2, 300, 2);
-		addObject(tempPlat4);
-		addObject(new Enemy(500, 378, this, 1, true, ObjectId.Enemy));
-		addObject(new Enemy(600, 378, this, 1, true, ObjectId.Enemy));
-	}
 }

@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 import java.util.Random;
 
  
@@ -12,6 +13,8 @@ public class Game extends Canvas implements Runnable{
 	
 	private boolean running = false;
 	private Thread thread;
+	private BufferedImage background = null;
+	private BufferedImage complete = null;
 	
 	public static int WIDTH,HEIGHT;
 	
@@ -23,11 +26,19 @@ public class Game extends Canvas implements Runnable{
 		
 		WIDTH = getWidth();
 		HEIGHT = getHeight();
+		
+		ImageLoader loader = new ImageLoader();
+		background = loader.loadImage("/trees3.png");
+		complete = loader.loadImage("/level_complete.png");
+		
+		//loadImageBackground(background);
 		handler = new Handler(this);
 		camera = new Camera(0,0);
 		
-		handler.createLevel();
-		handler.addObject(new Player(100, 100, handler, camera, ObjectId.Player));
+		Level1 level1 = new Level1(handler);
+		level1.createLevel();
+		//handler.addObject(new Player(4700, 400, handler, camera, ObjectId.Player));
+		handler.addObject(new Player(0, 0, handler, camera, ObjectId.Player));
 		
 		this.addKeyListener(new KeyInput(handler));
 	}
@@ -51,25 +62,25 @@ public class Game extends Canvas implements Runnable{
 		double ns = 1000000000 / amountOfTicks;
 		double delta = 0;
 		long timer = System.currentTimeMillis();
-		int updates = 0;
-		int frames = 0;
+//		int updates = 0;
+//		int frames = 0;
 		while(running){
 			long now = System.nanoTime();
 			delta += (now - lastTime) / ns;
 			lastTime = now;
 			while(delta >= 1){
 				tick();
-				updates++;
+//				updates++;
 				delta--;
 			}
 			render();
-			frames++;
+//			frames++;
 					
 			if(System.currentTimeMillis() - timer > 1000){
 				timer += 1000;
 				//System.out.println("FPS: " + frames + " TICKS: " + updates);
-				frames = 0;
-				updates = 0;
+//				frames = 0;
+//				updates = 0;
 			}
 		}
 	}
@@ -87,12 +98,15 @@ public class Game extends Canvas implements Runnable{
 		
 		Graphics g = bs.getDrawGraphics();
 		Graphics2D g2d = (Graphics2D)g;
+		g.drawImage(background, 0, 0, Game.WIDTH, Game.HEIGHT, this);
+		
 		/////////////////Draw here/////////////////
-		g.setColor(Color.black);
-		g.fillRect(0, 0, getWidth(), getHeight());
+		//g.setColor(Color.black);
+		//g.fillRect(0, 0, getWidth(), getHeight());
 		
 		g2d.translate(camera.getX(), camera.getY());
 		handler.render(g);
+		g.drawImage(complete, 8200, -300, this);
 		//g2d.translate(-camera.getX(), -camera.getY());
 		/////////////////////////////////
 		
@@ -100,8 +114,14 @@ public class Game extends Canvas implements Runnable{
 		bs.show();
 	}
 	
+//	private void loadImageBackground(BufferedImage image){
+//		int w = image.getWidth();
+//		int h = image.getHeight();
+//		//System.out.println(w + " " + h);
+//	}
+	
 	public static void main(String args[]){
-		new Window(800,600,"Java Final Project", new Game());
+		new Window(1066,600,"Java Final Project", new Game());
 	}
 	
 }

@@ -5,6 +5,7 @@ public enum ObjectId {
 	Enemy(),
 	Block(),
 	Projectile(),
+	Platform(),
 	PlatformA(),
 	PlatformB();
 

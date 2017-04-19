@@ -9,8 +9,8 @@ import java.util.LinkedList;
 
 public class Block extends GameObject{
 
-	int width = 32;
-	int height = 32;
+	public static int width = 32;
+	public static int height = 32;
 	
 	public Block(float x, float y, ObjectId id) {
 		super(x, y, id);
@@ -29,9 +29,9 @@ public class Block extends GameObject{
 		g.drawLine((int) x,  (int) y,  (int)x + width, (int)y + height);
 		g.drawLine((int) x,  (int) y + height,  (int)x + width, (int)y);
 		g.drawRect((int)x, (int)y, width, height);
-		g.setColor(Color.red);
-		Graphics2D g2d = (Graphics2D)g;
-		g2d.draw(getBounds());
+//		g.setColor(Color.red);
+//		Graphics2D g2d = (Graphics2D)g;
+//		g2d.draw(getBounds());
 	}
 	
 	public int getWidth(){

@@ -10,7 +10,7 @@ import java.util.LinkedList;
 public class Projectile extends GameObject{
 
 	float gravity = 0.5f;
-	int diameter = 20;
+	private int diameter = 20;
 	private Color color;
 	
 	public Projectile(float x, float y, float velX, float velY, Color color, ObjectId id) {
@@ -34,10 +34,11 @@ public class Projectile extends GameObject{
 
 	@Override
 	public void render(Graphics g) {
-		Graphics2D g2d = (Graphics2D)g;
+		
 		g.setColor(color);
 		g.fillOval((int)x, (int)y, (int)diameter, (int)diameter);
-		g2d.draw(getBounds());
+//		Graphics2D g2d = (Graphics2D)g;
+//		g2d.draw(getBounds());
 	}
 
 	@Override
@@ -49,6 +50,11 @@ public class Projectile extends GameObject{
 	public Color getColor(){
 		
 		return color;
+	}
+	
+	public float getY(){
+		
+		return y;
 	}
 	
 }
