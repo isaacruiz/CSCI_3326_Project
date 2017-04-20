@@ -23,27 +23,30 @@ public class Enemy extends GameObject{
 		this.handler = handler;
 		dynamicColor = colorChange;
 		
-		fireRate = rand.nextInt(10) + 60;
+		fireRate = rand.nextInt(30) + 30;
 		this.color = color;
 	}
 
 	@Override
 	public void tick(LinkedList<GameObject> object) {
 
-		if(counter % fireRate == 0){
-		float vpx, vpy;
-		vpx = rand.nextInt(20) - 10;
-		vpy = -1 * (rand.nextInt(20) + 10);
-		Projectile p = new Projectile(x, y, vpx, vpy, color, ObjectId.Projectile);
-		handler.addObject(p);
-
-	
+		if (dynamicColor){
+			toggleColor();
 		}
+		if (counter % fireRate == 0) {
+			float vpx, vpy;
+			vpx = rand.nextInt(20) - 10;
+			vpy = -1 * (rand.nextInt(15) + 10);
+			Projectile p = new Projectile(x, y, vpx, vpy, color, ObjectId.Projectile);
+			handler.addObject(p);
+
+		}
+		toggle++;
 		counter++;
 	}
 	
 	protected void toggleColor(){
-		if(toggle % 80 == 0){
+		if(toggle % 100 == 0){
 			if(color == Color.green)
 				color = Color.yellow;
 			
@@ -54,9 +57,14 @@ public class Enemy extends GameObject{
 	@Override
 	public void render(Graphics g) {
 		Graphics2D g2d = (Graphics2D)g;
+		
+		g2d.setColor(Color.black);
+		
+		g.drawOval((int)x, (int)y - 20, width, height);
+		g.drawRect((int)x, (int)y, width, height);
+		
 		g2d.setColor(color);
 		g2d.fillOval((int)x, (int)y - 20, width, height);
-
 		g2d.fillRect((int)x, (int)y, width, height);
 	}
 

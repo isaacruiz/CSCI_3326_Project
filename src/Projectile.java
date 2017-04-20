@@ -1,7 +1,7 @@
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
+//import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.util.LinkedList;
 
@@ -10,8 +10,8 @@ import java.util.LinkedList;
 public class Projectile extends GameObject{
 
 	float gravity = 0.5f;
-	private int diameter = 20;
-	private Color color;
+	protected int diameter = 20;
+	protected Color color;
 	
 	public Projectile(float x, float y, float velX, float velY, Color color, ObjectId id) {
 		super(x, y, id);
@@ -19,6 +19,12 @@ public class Projectile extends GameObject{
 		this.velY = velY;
 		this.color = color;
 	}
+	
+	public Projectile(float x, float y, ObjectId id) {
+		super(x, y, id);
+		velX = 0;
+		velY = 0;
+		}
 	
 	@Override
 	public void tick(LinkedList<GameObject> object) {

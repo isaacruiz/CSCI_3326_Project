@@ -24,7 +24,7 @@ public class KeyInput extends KeyAdapter {
 				if(key == KeyEvent.VK_A) p.setMoveLeft(true);
 				if(key == KeyEvent.VK_W && !tempObject.isJumping()){
 						tempObject.setJumping(true);
-						tempObject.setVelY(-10);
+						tempObject.setVelY(-13);
 				}
 						
 				if(key == KeyEvent.VK_SPACE) p.toggleColor();	

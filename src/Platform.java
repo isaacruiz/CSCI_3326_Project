@@ -1,9 +1,8 @@
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.util.LinkedList;
-import java.lang.Math;
+//import java.awt.Graphics2D;
 
 public class Platform extends GameObject {
 
@@ -16,7 +15,7 @@ public class Platform extends GameObject {
 	private float centerX;
 	private float centerY;
 	private float initX;
-	private float initY;
+//	private float initY;
 	private boolean circular = false;
 	public float lbMove;
 	public float rbMove;
@@ -27,7 +26,7 @@ public class Platform extends GameObject {
 	public Platform(float x, float y, float width, float height, Color color, ObjectId id) {
 		super(x, y, id);
 		initX = x;
-		initY = y;
+//		initY = y;
 		this.color = color;
 		this.width = width;
 		this.height = height;
@@ -66,23 +65,26 @@ public class Platform extends GameObject {
 		g.setColor(color);
 		g.fillRect((int) x, (int) y, (int)width, (int)height);
 		
-		g.setColor(color.red);
-		Graphics2D g2d = (Graphics2D)g;
+		g.setColor(Color.black);
+		g.drawRect((int)x, (int) y, (int)width, (int)height);
 		
-		//draw initial spawn
-		g2d.drawRect((int)initX, (int)initY, (int)width, (int)height);
-		
-		//draw center
-		g2d.drawLine((int)centerX-5, (int)centerY, (int)centerX + 5, (int)centerY);
-		g2d.drawLine((int)centerX, (int)centerY-5, (int)centerX, (int)centerY + 5);
-		
-		//Draw bounds (up-down movement)
-		g2d.drawLine((int)initX, (int)(ubMove), (int)(initX + width), (int)(ubMove));
-		g2d.drawLine((int)initX, (int)(bbMove), (int)(initX + width), (int)(bbMove));
-		
-		//Draw bounds (left-right movement)
-		g2d.drawLine((int)(lbMove), (int)(initY - delX/2), (int)(lbMove), (int)(initY + delX/2));
-		g2d.drawLine((int)(rbMove), (int)(initY - delX/2), (int)(rbMove), (int)(initY + delX/2));
+//		g.setColor(Color.red);
+//		Graphics2D g2d = (Graphics2D)g;
+//		
+//		//draw initial spawn
+//		g2d.drawRect((int)initX, (int)initY, (int)width, (int)height);
+//		
+//		//draw center
+//		g2d.drawLine((int)centerX-5, (int)centerY, (int)centerX + 5, (int)centerY);
+//		g2d.drawLine((int)centerX, (int)centerY-5, (int)centerX, (int)centerY + 5);
+//		
+//		//Draw bounds (up-down movement)
+//		g2d.drawLine((int)initX, (int)(ubMove), (int)(initX + width), (int)(ubMove));
+//		g2d.drawLine((int)initX, (int)(bbMove), (int)(initX + width), (int)(bbMove));
+//		
+//		//Draw bounds (left-right movement)
+//		g2d.drawLine((int)(lbMove), (int)(initY - delX/2), (int)(lbMove), (int)(initY + delX/2));
+//		g2d.drawLine((int)(rbMove), (int)(initY - delX/2), (int)(rbMove), (int)(initY + delX/2));
 	}
 
 	public void toggleColor(){
@@ -97,6 +99,10 @@ public class Platform extends GameObject {
 	}
 	public void setDynamicColor(boolean c){
 		dynamicColor = c;
+	}
+	
+	public void setColor(Color c){
+		color = c;
 	}
 	public void setMovement(float vel, float radius, int option){
 		

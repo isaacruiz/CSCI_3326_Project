@@ -1,11 +1,8 @@
 import java.awt.Canvas;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
-import java.util.Random;
-
  
 public class Game extends Canvas implements Runnable{
 	
@@ -15,12 +12,17 @@ public class Game extends Canvas implements Runnable{
 	private Thread thread;
 	private BufferedImage background = null;
 	private BufferedImage complete = null;
+	private BufferedImage startmsg = null;
+	private BufferedImage health = null;
+	private BufferedImage instruction = null;
 	
 	public static int WIDTH,HEIGHT;
 	
 	//Object
 	Handler handler;
 	Camera camera;
+	Player player;
+	HealthBar healthBar;
 	
 	public void init(){
 		
@@ -30,15 +32,23 @@ public class Game extends Canvas implements Runnable{
 		ImageLoader loader = new ImageLoader();
 		background = loader.loadImage("/trees3.png");
 		complete = loader.loadImage("/level_complete.png");
+		startmsg = loader.loadImage("/escape_the_missle.png");
+		health = loader.loadImage("/health.png");
+		instruction = loader.loadImage("/Instructions.png");
+		
+			    
 		
 		//loadImageBackground(background);
 		handler = new Handler(this);
 		camera = new Camera(0,0);
-		
+	
 		Level1 level1 = new Level1(handler);
 		level1.createLevel();
-		handler.addObject(new Player(4700, 400, handler, camera, ObjectId.Player));
-		//handler.addObject(new Player(0, 0, handler, camera, ObjectId.Player));
+		//handler.addObject(new Player(4700, 400, handler, camera, ObjectId.Player));
+		player = new Player(0, 500, handler, camera, ObjectId.Player);
+		healthBar = new HealthBar(player);
+		handler.addObject(player);
+		handler.addObject(new HomingMissle(-200, 500, player, ObjectId.HomingMissle));
 		
 		this.addKeyListener(new KeyInput(handler));
 	}
@@ -87,6 +97,7 @@ public class Game extends Canvas implements Runnable{
 	
 	private void tick(){
 		handler.tick();
+		healthBar.tick();
 	}
 	
 	private void render(){
@@ -99,13 +110,19 @@ public class Game extends Canvas implements Runnable{
 		Graphics g = bs.getDrawGraphics();
 		Graphics2D g2d = (Graphics2D)g;
 		g.drawImage(background, 0, 0, Game.WIDTH, Game.HEIGHT, this);
+		healthBar.render(g);
+		g.drawImage(health, 10, 35, (int)(health.getWidth()*0.4), (int)(health.getHeight() * 0.4), this);
 		
 		/////////////////Draw here/////////////////
 		//g.setColor(Color.black);
 		//g.fillRect(0, 0, getWidth(), getHeight());
 		
+		
 		g2d.translate(camera.getX(), camera.getY());
 		handler.render(g);
+		
+		g.drawImage(startmsg, -400, 400, (int)(0.5 * startmsg.getWidth()), (int)(0.5 * startmsg.getHeight()), this);
+		g.drawImage(instruction, 200, 400, (int)(0.75 * instruction.getWidth()), (int)(0.75 * instruction.getHeight()), this);
 		g.drawImage(complete, 8200, -300, this);
 		//g2d.translate(-camera.getX(), -camera.getY());
 		/////////////////////////////////

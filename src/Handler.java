@@ -1,8 +1,6 @@
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.util.LinkedList;
-import java.util.Random;
 
 
 
@@ -29,10 +27,10 @@ public class Handler {
 			}
 			
 			if(tempObject.getId() == ObjectId.Projectile){
-				if(((Projectile)tempObject).getY() > 1000)
+				if(tempObject.getY() > 1500)
 					removeObject(tempObject);
 				
-				if(((Projectile)tempObject).getY() < -1000)
+				if(tempObject.getY() < -1000)
 					removeObject(tempObject);
 			}
 			

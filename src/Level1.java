@@ -22,21 +22,19 @@ public class Level1 {
 		*/
 		Enemy e;
 		int xx = 0;
-		PlatformA a;
-		PlatformB b;
 		Platform p;
 		float platVel = 3;
 		
 		//First fifth of the level x = 0 -> x = 1200
 		addFloor(xx, 600, 1200);
 		
-		e = new Enemy(600, 700, handler, Color.green, true, ObjectId.Enemy);
-		handler.addObject(e);
+//		e = new Enemy(600, 700, handler, Color.green, false, ObjectId.Enemy);
+//		handler.addObject(e);
 		
-		e = new Enemy(1000, 400, handler, Color.yellow, true, ObjectId.Enemy);
-		handler.addObject(e);
+//		e = new Enemy(1000, 400, handler, Color.yellow, false, ObjectId.Enemy);
+//		handler.addObject(e);
 		
-		e = new Enemy(1600, 400, handler, Color.red, false, ObjectId.Enemy);
+		e = new Enemy(1600, 400, handler, Color.yellow, true, ObjectId.Enemy);
 		handler.addObject(e);
 		
 		//Second fifth of the level x = 1200 -> x = 2400
@@ -45,6 +43,7 @@ public class Level1 {
 		//Up-down platform
 		p = new Platform(xx + 16, 370, 200, 32, Color.gray, ObjectId.Platform);
 		p.setMovement(platVel, 234, 2);
+		p.setPosition(0, -200);
 		//p.setDynamicColor(true);
 		handler.addObject(p);
 		
@@ -66,32 +65,32 @@ public class Level1 {
 
 		//Third fifth of the level x = 2400 -> x = 3600
 		xx = 2600;
-		p = new Platform(xx, 600, 100, 32, Color.gray, ObjectId.Platform);
+		p = new Platform(xx, 600, 100, 32, Color.green, ObjectId.Platform);
 		p.setMovement(platVel, 150, 1);
 		p.setPosition(-150, 0);
 		handler.addObject(p);
 		
-		e = new Enemy(xx + 30, 700, handler, Color.red, false, ObjectId.Enemy);
+		e = new Enemy(xx + 30, 800, handler, Color.red, false, ObjectId.Enemy);
 		handler.addObject(e);
 		
 		xx += 500;
-		p = new Platform(xx, 600, 100, 32, Color.gray, ObjectId.Platform);
+		p = new Platform(xx, 600, 100, 32, Color.yellow, ObjectId.Platform);
 		p.setPosition(150, 0);
 		p.setMovement(3, 150, 1);
 		
 		handler.addObject(p);
 		
 		xx += 500;
-		p = new Platform(xx, 600, 100, 32, Color.gray, ObjectId.Platform);
+		p = new Platform(xx, 600, 100, 32, Color.green, ObjectId.Platform);
 		p.setMovement(platVel, 150, 1);
 		p.setPosition(-150, 0);
 		handler.addObject(p);
 		
-		e = new Enemy(xx + 30, 700, handler, Color.red, false, ObjectId.Enemy);
+		e = new Enemy(xx + 30, 800, handler, Color.red, false, ObjectId.Enemy);
 		handler.addObject(e);
 		
 		xx += 500;
-		p = new Platform(xx, 600, 100, 32, Color.gray, ObjectId.Platform);
+		p = new Platform(xx, 600, 100, 32, Color.yellow, ObjectId.Platform);
 		p.setMovement(platVel, 150, 1);
 		p.setPosition(150, 0);
 		handler.addObject(p);
@@ -189,7 +188,12 @@ public class Level1 {
 		int yy = 400;
 		
 		for(int i = 0; i < 5; i++){
-			p = new Platform(xx, yy, 100, 32, Color.gray, ObjectId.Platform);
+			p = new Platform(xx, yy, 100, 32, Color.green, ObjectId.Platform);
+			
+			if(i % 2 == 0)
+				p.setColor(Color.yellow);
+			
+			p.setDynamicColor(true);
 			handler.addObject(p);
 			xx += 200;
 			yy -= 100;
