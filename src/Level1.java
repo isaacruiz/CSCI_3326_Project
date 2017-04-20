@@ -106,47 +106,37 @@ public class Level1 {
 		xx += 600;
 		
 		e = new EnemyB(xx + 50, 550, handler, Color.red, false, ObjectId.Enemy);
-		
+		e.toggleProjGrav();
 		handler.addObject(e);
 		
-		p = new Platform(xx, 550, 150, 32, Color.gray, ObjectId.Platform);
+		p = new Platform(xx, 550, 150, 32, Color.yellow, ObjectId.Platform);
 		p.setMovement(platVel, 250, 4);
-		p.setPosition(-150, -150);
-		//Set platform to move up/right
-		p.setVelX(2);
-		p.setVelY(-2);
-		
+		p.setPosition(150, 150);
+		p.setVelX(platVel);
+		p.setVelY(-platVel);
 		handler.addObject(p);
 		
+		p = new Platform(xx, 550, 150, 32, Color.yellow, ObjectId.Platform);
+		p.setMovement(platVel, 250, 4);
+		p.setPosition(-150, -150);
+		p.setVelX(-platVel);
+		p.setVelY(platVel);
+		handler.addObject(p);
 		
+		p = new Platform(xx, 550, 150, 32, Color.green, ObjectId.Platform);
+		p.setMovement(platVel, 250, 4);
+		p.setPosition(-150, 150);
+		p.setVelX(platVel);
+		p.setVelY(platVel);
+		handler.addObject(p);
+//		
+		p = new Platform(xx, 550, 150, 32, Color.green, ObjectId.Platform);
+		p.setMovement(platVel, 250, 4);
+		p.setPosition(150, -150);
+		p.setVelX(-platVel);
+		p.setVelY(-platVel);
+		handler.addObject(p);
 		
-		
-		
-//		p = new Platform(xx, 550, 150, 32, Color.cyan, ObjectId.Platform);
-//		p.setMovement(2, 250, 3);
-//		p.setPosition(-150, 0);
-//		//set Platfrom to move down/right
-//		p.setVelX(2);
-//		p.setVelY(2);
-//		addObject(p);
-//		
-//		p = new Platform(xx, 550, 150, 32, Color.red, ObjectId.Platform);
-//		p.setMovement(2, 250, 3);
-//		p.setPosition(0, 150);
-//		
-//		//set platform to move down/left
-//		p.setVelX(-2);
-//		p.setVelY(2);
-//		addObject(p);
-//		
-//		p = new Platform(xx, 550, 150, 32, Color.white, ObjectId.Platform);
-//		p.setMovement(2, 250, 3);
-//		p.setPosition(0, -150);
-//		
-//		//set platform to move up/left
-//		p.setVelX(-2);
-//		p.setVelY(-2);
-//		addObject(p);
 		//Last fifth of the level x = 4800 -> x = 6000
 		xx = 5600;
 		
@@ -157,39 +147,39 @@ public class Level1 {
 		xx += 400;
 		platVel = 3;
 		int moveRad = 200;
-		p = new Platform(xx, 570, 50, 32, Color.gray, ObjectId.Platform);
+		p = new Platform(xx, 570, 50, 32, Color.yellow, ObjectId.Platform);
 		p.setMovement(platVel, moveRad, 2);
 		p.setPosition(0, r.nextInt(moveRad) - moveRad/2);
 		handler.addObject(p);
 		
 		xx += 200;
-		p = new Platform(xx, 570, 50, 32, Color.gray, ObjectId.Platform);
-		p.setMovement(platVel, moveRad, 2);
-		p.setPosition(0, r.nextInt(moveRad) - moveRad/2);
-		p.setVelY(-p.getVelY());
-		handler.addObject(p);
-		
-		xx += 200;
-		p = new Platform(xx, 570, 50, 32, Color.gray, ObjectId.Platform);
-		p.setMovement(platVel, moveRad, 2);
-		p.setPosition(0, r.nextInt(moveRad) - moveRad/2);
-		handler.addObject(p);
-		
-		xx += 200;
-		p = new Platform(xx, 570, 50, 32, Color.gray, ObjectId.Platform);
+		p = new Platform(xx, 570, 50, 32, Color.green, ObjectId.Platform);
 		p.setMovement(platVel, moveRad, 2);
 		p.setPosition(0, r.nextInt(moveRad) - moveRad/2);
 		p.setVelY(-p.getVelY());
 		handler.addObject(p);
 		
 		xx += 200;
-		p = new Platform(xx, 570, 50, 32, Color.gray, ObjectId.Platform);
+		p = new Platform(xx, 570, 50, 32, Color.yellow, ObjectId.Platform);
 		p.setMovement(platVel, moveRad, 2);
 		p.setPosition(0, r.nextInt(moveRad) - moveRad/2);
 		handler.addObject(p);
 		
 		xx += 200;
-		p = new Platform(xx, 570, 50, 32, Color.gray, ObjectId.Platform);
+		p = new Platform(xx, 570, 50, 32, Color.green, ObjectId.Platform);
+		p.setMovement(platVel, moveRad, 2);
+		p.setPosition(0, r.nextInt(moveRad) - moveRad/2);
+		p.setVelY(-p.getVelY());
+		handler.addObject(p);
+		
+		xx += 200;
+		p = new Platform(xx, 570, 50, 32, Color.yellow, ObjectId.Platform);
+		p.setMovement(platVel, moveRad, 2);
+		p.setPosition(0, r.nextInt(moveRad) - moveRad/2);
+		handler.addObject(p);
+		
+		xx += 200;
+		p = new Platform(xx, 570, 50, 32, Color.green, ObjectId.Platform);
 		p.setMovement(platVel, moveRad, 2);
 		p.setPosition(0, r.nextInt(moveRad) - moveRad/2);
 		p.setVelY(-p.getVelY());

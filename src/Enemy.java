@@ -7,7 +7,6 @@ import java.util.Random;
 
 public class Enemy extends GameObject{
 
-	Projectile projectile;
 	Color color;
 	int width = 40;
 	int height = 40;
@@ -15,6 +14,7 @@ public class Enemy extends GameObject{
 	boolean dynamicColor;
 	int fireRate;
 	Handler handler;
+	protected boolean projGravity = true;
 	int counter = 0;
 	Random rand = new Random();
 	
@@ -29,21 +29,19 @@ public class Enemy extends GameObject{
 
 	@Override
 	public void tick(LinkedList<GameObject> object) {
-		int vpx = rand.nextInt(30) - 20;
-		int vpy = -1 * (rand.nextInt(20) + 7);
-		
-		if(dynamicColor){
-			toggleColor();
-			toggle++;
+
+		if(counter % fireRate == 0){
+		float vpx, vpy;
+		vpx = rand.nextInt(20) - 10;
+		vpy = -1 * (rand.nextInt(20) + 10);
+		Projectile p = new Projectile(x, y, vpx, vpy, color, ObjectId.Projectile);
+		handler.addObject(p);
+
+	
 		}
-		//shoots projectile every firerate no of updates
-		//(eg. fireRate = 60 and updates ~ 60/second so firerate = 1/second
-			if(counter % fireRate == 0)  
-				handler.addObject(new Projectile(x,y, vpx, vpy, color, ObjectId.Projectile));
-			
-			counter++;
-		
+		counter++;
 	}
+	
 	protected void toggleColor(){
 		if(toggle % 80 == 0){
 			if(color == Color.green)
@@ -70,6 +68,10 @@ public class Enemy extends GameObject{
 	
 	public void setFireRate(int fr){
 		fireRate = fr;
+	}
+	
+	public void toggleProjGrav(){
+		projGravity = false;
 	}
 
 }

@@ -15,26 +15,33 @@ public class EnemyB extends Enemy {
 		g2d.setColor(color);
 		g2d.fillOval((int)x, (int)y, width, height);
 	}
-	
-	public void tick(LinkedList<GameObject> object) {
-		int vpx = rand.nextInt(30) - 20;
-		int vpy =rand.nextInt(40) - 20;
+
+public void tick(LinkedList<GameObject> object) {
+		
+		int vpx= 0;
+		int vpy = 0;
+		
 		
 		if(dynamicColor){
 			toggleColor();
 			toggle++;
 		}
-		//shoots projectile every firerate no of updates
-		//(eg. fireRate = 60 and updates ~ 60/second so firerate = 1/second
-			if(counter % fireRate == 0)  
-				handler.addObject(new Projectile(x,y, vpx, vpy, color, ObjectId.Projectile));
+		// shoots projectile every firerate no of updates
+		// (eg. fireRate = 60 and updates ~ 60/second so firerate = 1/second
+		if (counter % fireRate == 0) {
 			
-			counter++;
-		
-	}
-	
-	public void toggleProjGrav(){
-		
-	}
+			
+				for(int i = 0; i < 3; i++){
+				vpx = rand.nextInt(20) - 10;
+				vpy = rand.nextInt(20) - 10;
+				Projectile p = new Projectile(x, y, vpx, vpy, color, ObjectId.Projectile);
+				p.gravity = 0;
+				handler.addObject(p);
+				
+			}
+		}
 
+		counter++;
+
+	}
 }

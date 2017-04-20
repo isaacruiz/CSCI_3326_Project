@@ -31,6 +31,9 @@ public class Handler {
 			if(tempObject.getId() == ObjectId.Projectile){
 				if(((Projectile)tempObject).getY() > 1000)
 					removeObject(tempObject);
+				
+				if(((Projectile)tempObject).getY() < -1000)
+					removeObject(tempObject);
 			}
 			
 			tempObject.tick(object);
