@@ -3,6 +3,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.image.ImageObserver;
 import java.util.LinkedList;
 
 
@@ -23,12 +24,13 @@ public class Block extends GameObject{
 	//Draws a gray block of dimension width x height and 
 	//a cross going from coner to corner of the block
 	public void render(Graphics g) {
-		g.setColor(Color.gray);
-		g.fillRect((int)x, (int)y, WIDTH, HEIGHT);
-		g.setColor(Color.black);
-		g.drawLine((int) x,  (int) y,  (int)x + WIDTH, (int)y + HEIGHT);
-		g.drawLine((int) x,  (int) y + HEIGHT,  (int)x + WIDTH, (int)y);
-		g.drawRect((int)x, (int)y, WIDTH, HEIGHT);
+//		g.setColor(Color.gray);
+//		g.fillRect((int)x, (int)y, WIDTH, HEIGHT);
+//		g.setColor(Color.black);
+//		g.drawLine((int) x,  (int) y,  (int)x + WIDTH, (int)y + HEIGHT);
+//		g.drawLine((int) x,  (int) y + HEIGHT,  (int)x + WIDTH, (int)y);
+//		g.drawRect((int)x, (int)y, WIDTH, HEIGHT);
+		g.drawImage(Texture.Block, (int)x, (int)y, WIDTH, HEIGHT, null);
 	}
 
 	public Rectangle getBounds() {

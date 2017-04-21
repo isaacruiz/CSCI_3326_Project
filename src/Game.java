@@ -23,6 +23,7 @@ public class Game extends Canvas implements Runnable{
 	HealthBar healthBar;
 	ImageLoader loader;
 	Level1 level1;
+	Texture texture = new Texture();
 
 	public void init(){
 		
