@@ -30,7 +30,7 @@ public class Block extends GameObject{
 //		g.drawLine((int) x,  (int) y,  (int)x + WIDTH, (int)y + HEIGHT);
 //		g.drawLine((int) x,  (int) y + HEIGHT,  (int)x + WIDTH, (int)y);
 //		g.drawRect((int)x, (int)y, WIDTH, HEIGHT);
-		g.drawImage(Texture.Block, (int)x, (int)y, WIDTH, HEIGHT, null);
+		g.drawImage(Texture.block, (int)x, (int)y, WIDTH, HEIGHT, null);
 	}
 
 	public Rectangle getBounds() {
