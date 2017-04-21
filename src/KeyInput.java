@@ -9,9 +9,12 @@ public class KeyInput extends KeyAdapter {
 	
 	Handler handler;
 	
+	//Take handler in constructor to access game objects in the handler and modify their values
+	//in accordance with key input
 	public KeyInput(Handler handler){
 		this.handler = handler;
 	}
+	
 	public void keyPressed(KeyEvent e){
 		int key = e.getKeyCode();
 		
@@ -25,15 +28,12 @@ public class KeyInput extends KeyAdapter {
 				if(key == KeyEvent.VK_W && !tempObject.isJumping()){
 						tempObject.setJumping(true);
 						tempObject.setVelY(-13);
-				}
-						
+				}	
 				if(key == KeyEvent.VK_SPACE) p.toggleColor();	
 			}	
 		}
-		
-		if(key == KeyEvent.VK_ESCAPE){
+		if(key == KeyEvent.VK_ESCAPE)
 			System.exit(1);
-		}
 	}
 	
 	public void keyReleased(KeyEvent e){

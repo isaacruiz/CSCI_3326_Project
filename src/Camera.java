@@ -4,11 +4,6 @@ public class Camera {
 	private float x;
 	private float y;
 	
-	public Camera(float x, float y){
-		this.x = x;
-		this.y = y;
-	}
-	
 	public void tick(Player player){
 		x = -player.getX() + Game.WIDTH/2;
 		y = -player.getY() + Game.HEIGHT/2;
@@ -25,8 +20,6 @@ public class Camera {
 	public void setY(float y) {
 		this.y = y;
 	}
-	
-	
 }
 
 

@@ -6,7 +6,6 @@ import java.util.LinkedList;
 
 public class Platform extends GameObject {
 
-	protected Color color;
 	protected int toggle;
 	private float width;
 	private float height;
@@ -14,18 +13,18 @@ public class Platform extends GameObject {
 	private float delY = 0;
 	private float centerX;
 	private float centerY;
-	private float initX;
+//	private float initX; //Not needed unless drawing movwment boundaries
 //	private float initY;
-	private boolean circular = false;
 	public float lbMove;
 	public float rbMove;
 	public float ubMove;
-	public float bbMove;
+	private float bbMove;
 	public boolean dynamicColor = false;
+	protected Color color;
 	
 	public Platform(float x, float y, float width, float height, Color color, ObjectId id) {
 		super(x, y, id);
-		initX = x;
+//		initX = x;
 //		initY = y;
 		this.color = color;
 		this.width = width;
@@ -40,15 +39,7 @@ public class Platform extends GameObject {
 	public void tick(LinkedList<GameObject> object) {
 		x += velX;
 		y += velY;
-//		if(x + width > centerX + delX || x < centerX - delX)
-//			velX *= -1;
-//		
-//		if(y  + height > centerY + delY || y < centerY - delY)
-//			velY *= -1;
-	
-		if (circular){
-			
-		}
+
 		if(x + width > rbMove || x < lbMove)
 			velX *= -1;
 		
@@ -68,6 +59,7 @@ public class Platform extends GameObject {
 		g.setColor(Color.black);
 		g.drawRect((int)x, (int) y, (int)width, (int)height);
 		
+//		-----------------------Platform movement boundaries------------------------
 //		g.setColor(Color.red);
 //		Graphics2D g2d = (Graphics2D)g;
 //		
@@ -94,9 +86,9 @@ public class Platform extends GameObject {
 				color = Color.yellow;
 			else
 				color = Color.green;
-		}
-		
+		}	
 	}
+	
 	public void setDynamicColor(boolean c){
 		dynamicColor = c;
 	}
@@ -108,7 +100,7 @@ public class Platform extends GameObject {
 		
 		//Make cases for left-right, up-down, diagonal, circular
 		delX = delY = radius;
-		lbMove = initX - delX;
+		lbMove = centerX - width/2 - delX;
 		rbMove = centerX + width/2 + delX;
 		ubMove = centerY + height/2 + delY;
 		bbMove = centerY - height/2 - delY;
@@ -122,14 +114,8 @@ public class Platform extends GameObject {
 			velY = vel;
 			break;
 			
-		case 3:
-			velX = velY = vel;
-			
 		default:
-			
-			
-			break;
-			
+			velX = velY = vel;			
 		}
 		
 	}
@@ -151,7 +137,6 @@ public class Platform extends GameObject {
 	}
 	
 	public Rectangle getBounds() {
-
 		return new Rectangle((int) x, (int) y, (int)width, (int)height);
 	}
 

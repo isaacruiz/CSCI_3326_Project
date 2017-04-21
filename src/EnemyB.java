@@ -16,7 +16,7 @@ public class EnemyB extends Enemy {
 		g2d.fillOval((int)x, (int)y, width, height);
 	}
 
-public void tick(LinkedList<GameObject> object) {
+	public void tick(LinkedList<GameObject> object) {
 		
 		int vpx= 0;
 		int vpy = 0;
@@ -26,22 +26,19 @@ public void tick(LinkedList<GameObject> object) {
 			toggleColor();
 			toggle++;
 		}
-		// shoots projectile every firerate no of updates
+		// shoots i number of projectiles every firerate no of updates at a random trajectory
 		// (eg. fireRate = 60 and updates ~ 60/second so firerate = 1/second
 		if (counter % fireRate == 0) {
 			
-			
 				for(int i = 0; i < 3; i++){
-				vpx = rand.nextInt(20) - 10;
-				vpy = rand.nextInt(20) - 10;
+				vpx = rand.nextInt(10) - 5;
+				vpy = rand.nextInt(10) - 5;
 				Projectile p = new Projectile(x, y, vpx, vpy, color, ObjectId.Projectile);
 				p.gravity = 0;
-				handler.addObject(p);
-				
+				handler.addObject(p);	
 			}
 		}
-
 		counter++;
-
 	}
+	
 }

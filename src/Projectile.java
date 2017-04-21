@@ -26,30 +26,21 @@ public class Projectile extends GameObject{
 		velY = 0;
 		}
 	
-	@Override
 	public void tick(LinkedList<GameObject> object) {
-
 		y += velY;
 		x += velX;
 		
 		if (falling)
 			velY += gravity;
-		
-		
 	}
 
-	@Override
 	public void render(Graphics g) {
 		
 		g.setColor(color);
 		g.fillOval((int)x, (int)y, (int)diameter, (int)diameter);
-//		Graphics2D g2d = (Graphics2D)g;
-//		g2d.draw(getBounds());
 	}
 
-	@Override
 	public Rectangle getBounds() {
-		
 		return new Rectangle((int)(x), (int)(y), diameter, diameter);
 	}
 	

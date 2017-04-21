@@ -14,30 +14,24 @@ public class HomingMissle extends Projectile{
 	HomingMissle(float x, float y, Player p, ObjectId id){
 		super(x, y, id);
 		player = p;
-
+		diameter = 30;
 	}
 
-	@Override
-	public void tick(LinkedList<GameObject> object) {
+	//Changes color while following player across the map
+	public void tick(LinkedList<GameObject> object) {		
 		calcVelX();
 		calcVelY();
-		
 		toggleColor();
-	
 		x += velX;
 		y += velY;
 		toggle++;
 	}
 
-	@Override
 	public void render(Graphics g) {
-		
 		g.setColor(color);
 		g.fillOval((int)x,(int) y, (int)diameter, (int)diameter);
-		
 	}
 
-	@Override
 	public Rectangle getBounds() {
 		return new Rectangle((int)(x), (int)(y), diameter, diameter);
 	}
@@ -51,8 +45,9 @@ public class HomingMissle extends Projectile{
 		}
 	}
 	
-	public void calcVelX(){
-		
+	//calcVelX and calcVelY calculate the x and y componenets of velocity depending on where
+	//the player is relative to the missle
+	private void calcVelX(){
 		double theta;
 		theta = Math.atan((player.getY() - y)/(player.getX() - x));
 		velX = velocity * (float)Math.cos(theta);
@@ -61,8 +56,7 @@ public class HomingMissle extends Projectile{
 			velX *= -1;
 	}
 	
-public void calcVelY(){
-		
+	private void calcVelY(){
 		double theta;
 		theta = Math.atan((player.getY() - y)/(player.getX() - x));
 		velY = velocity * (float)Math.sin(theta);

@@ -8,34 +8,31 @@ import java.util.LinkedList;
 
 public class Player extends GameObject {
 
-	private float width = 48, height = 48;
-	protected Color color = Color.green;
+	private float width = 48;
+	private float height = 48;
 	private float gravity = 0.5f;
 	private int health = 200;
 	private final float MAX_SPEED = 10;
 	private boolean moveLeft;
 	private boolean moveRight;
 	private float moveSpeed = 8;
-	private Camera camera;
 	private boolean dead = false;
-	
+	private Color color = Color.green;
+	private Camera camera;
 	private Handler handler;
-	
 	
 	public Player(float x, float y, Handler handler, Camera camera, ObjectId id) {
 		super(x, y, id);
 		this.handler = handler;
 		moveLeft = false;
 		moveRight = false;
-		this.camera = camera;
-		
+		this.camera = camera;	
 	}
 
 	public boolean isDead(){
 		return dead;
 	}
 	public void tick(LinkedList<GameObject> object) {
-		System.out.println("X: " +  x + " Y: " + y);
 		x += velX;
 		y += velY;
 		if (y > 1000)
@@ -68,11 +65,8 @@ public class Player extends GameObject {
 			velX = 0;
 	}
 
-
 	public void setMoveRight(boolean moveRight) {
-		
 		this.moveRight = moveRight;
-		
 		if(moveRight)
 			velX = moveSpeed;
 		else
@@ -139,9 +133,8 @@ public class Player extends GameObject {
 	}
 	
 	private void collisionBlock(GameObject tempObject){
-		Block b = (Block)tempObject;
-
-		// Bottom Collision
+		
+		//Bottom Collision
 		if (getBoundsBottom().intersects(tempObject.getBounds())) {
 			y = tempObject.getY() - height;
 			velY = 0;
@@ -150,19 +143,15 @@ public class Player extends GameObject {
 		} else
 			falling = true;
 			
-			
-		
-	
-
 		// Top Collision
 		if (getBoundsTop().intersects(tempObject.getBounds())) {
-			y = tempObject.getY() + b.getHeight();
+			y = tempObject.getY() + Block.HEIGHT;
 			velY = 0;
 		}
 
 		// Left Collision
 		if (getBoundsLeft().intersects(tempObject.getBounds())) {
-			x = tempObject.getX() + b.getWidth();
+			x = tempObject.getX() + Block.WIDTH;
 		}
 
 		// Right Collision
@@ -171,14 +160,14 @@ public class Player extends GameObject {
 		}
 	}
 	
-	
 	private void collisionPlatform(GameObject tempObject){
 		Platform plat = (Platform) tempObject;
 
+		//If color of player equals color of platform, no collision is detected and player
+		//passes through platform
 		if (!color.equals(plat.getColor())) {
 
-			// Bottom Collision
-			
+			// Bottom Collision	
 			if (getBoundsBottom().intersects(tempObject.getBounds())) {
 				y = tempObject.getY() - height;
 				if(moveRight){
@@ -215,31 +204,25 @@ public class Player extends GameObject {
 	}
 	private void collisionProjectile(GameObject tempObject){
 
+		//Collision with normal projectile
 		if (tempObject.getId() == ObjectId.Projectile) {
 
 			Projectile proj = (Projectile) tempObject;
 			// Registers collision if projectile color is red or matches player
 			if ((proj.getColor() == Color.red || !(color.equals(proj.getColor()))) && getBounds().intersects(proj.getBounds())) {
-
 				health -= 25;
 				handler.removeObject(tempObject);
 			}
 		}
-
+		//Collision with homing missile
 		else {
-
 			HomingMissle h = (HomingMissle) tempObject;
-
-			if (getBounds().intersects(h.getBounds())) {
-
+			if (getBounds().intersects(h.getBounds()))
 				health -= 25;
-			}
 		}
 		if (health == 0)
 			dead = true;
-
 	}
-	
 	public int getHealth(){
 		return health;
 	}

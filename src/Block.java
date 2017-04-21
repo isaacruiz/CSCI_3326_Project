@@ -8,39 +8,30 @@ import java.util.LinkedList;
 
 public class Block extends GameObject{
 
-	public static int width = 32;
-	public static int height = 32;
+	//Static dimensions so all classes can access dimensions
+	public static final int WIDTH = 32;
+	public static final int HEIGHT = 32;
 	
 	public Block(float x, float y, ObjectId id) {
 		super(x, y, id);
 	}
 
-
 	public void tick(LinkedList<GameObject> object) {
-		
+		//Not needed for this class
 	}
 
-
+	//Draws a gray block of dimension width x height and 
+	//a cross going from coner to corner of the block
 	public void render(Graphics g) {
 		g.setColor(Color.gray);
-		g.fillRect((int)x, (int)y, width, height);
+		g.fillRect((int)x, (int)y, WIDTH, HEIGHT);
 		g.setColor(Color.black);
-		g.drawLine((int) x,  (int) y,  (int)x + width, (int)y + height);
-		g.drawLine((int) x,  (int) y + height,  (int)x + width, (int)y);
-		g.drawRect((int)x, (int)y, width, height);
-	}
-	
-	public int getWidth(){
-		return width;
-	}
-
-	public int getHeight(){
-		return height;
+		g.drawLine((int) x,  (int) y,  (int)x + WIDTH, (int)y + HEIGHT);
+		g.drawLine((int) x,  (int) y + HEIGHT,  (int)x + WIDTH, (int)y);
+		g.drawRect((int)x, (int)y, WIDTH, HEIGHT);
 	}
 
 	public Rectangle getBounds() {
-		
-		return new Rectangle((int)x, (int)y, width, height);
+		return new Rectangle((int)x, (int)y, WIDTH, HEIGHT);
 	}
-
 }
