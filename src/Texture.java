@@ -7,7 +7,7 @@ public class Texture {
 	public Texture(){
 	
 		ImageLoader loader = new ImageLoader();
-		Block = loader.loadImage("stone.png");
+		Block = loader.loadImage("stone.jpg");
 		
 	}
 	
