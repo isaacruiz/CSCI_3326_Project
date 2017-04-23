@@ -14,6 +14,10 @@ public class Texture {
 	public static BufferedImage turret = null;
 	public static BufferedImage greenBlock = null;
 	public static BufferedImage yellowBlock = null;
+	public static BufferedImage greenProj = null;
+	public static BufferedImage yellowProj = null;
+	public static BufferedImage greenEnemy = null;
+	public static BufferedImage yellowEnemy = null;
 	private BufferedImage spriteSheet;
 	
 	public Texture(){
@@ -26,10 +30,12 @@ public class Texture {
 		startmsg = loader.loadImage("escape_the_missle.png");
 		health = loader.loadImage("health.png");
 		instruction = loader.loadImage("Instructions.png");
-		turret = getSprite(1, 1, 64, 64);
-		//turret = loader.loadImage("/turret.png");
-		greenBlock = getSprite(5, 1, 32, 32);
-		yellowBlock = getSprite(5, 2, 32, 32);
+		greenEnemy = getSprite(1, 1, 64, 64);
+		yellowEnemy = getSprite(1, 2, 64, 64);
+		greenBlock = getSprite(3, 1, 32, 32);
+		yellowBlock = getSprite(3, 2, 32, 32);
+		greenProj = getSprite(3, 3, 32, 32);
+		yellowProj = getSprite(3, 4, 32, 32);
 	
 	}
 

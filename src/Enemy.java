@@ -2,7 +2,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import java.awt.geom.AffineTransform;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -68,8 +67,10 @@ public class Enemy extends GameObject{
 //		g2d.fillRect((int)x, (int)y, width, height);
 		
 		//g.drawImage(Texture.turret, (int)x, (int)y, null);
-		Texture.drawRotatedImage(Texture.turret, x, y, -1 * fireAngle + Math.PI/2, g);
-		
+		if(color == Color.yellow)
+				Texture.drawRotatedImage(Texture.yellowEnemy, x, y, -1 * fireAngle + Math.PI/2, g);
+		else //if (color == Color.red)
+			Texture.drawRotatedImage(Texture.greenEnemy, x, y, -1 * fireAngle + Math.PI/2, g);
 	}
 	
 	public Rectangle getBounds() {

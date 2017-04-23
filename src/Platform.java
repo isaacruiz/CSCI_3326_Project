@@ -127,6 +127,8 @@ public class Platform extends GameObject {
 		case 2:
 			velY = vel;
 			break;
+		case 4:
+			
 			
 		default:
 			velX = velY = vel;			

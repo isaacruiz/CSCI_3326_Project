@@ -2,7 +2,6 @@ import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
  
 public class Game extends Canvas implements Runnable{
 	
@@ -32,7 +31,8 @@ public class Game extends Canvas implements Runnable{
 		
 		level1.createLevel();
 		
-		player = new Player(0, 500, handler, camera, ObjectId.Player);
+		//player = new Player(0, 500, handler, camera, ObjectId.Player);
+		player = new Player(4700, 500, handler, camera, ObjectId.Player);
 		healthBar = new HealthBar(player);
 		
 		//Add players and homing projectile to the beginning of the level
