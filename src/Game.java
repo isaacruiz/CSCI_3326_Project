@@ -20,13 +20,13 @@ public class Game extends Canvas implements Runnable{
 	ImageLoader loader;
 	Level1 level1;
 	Texture texture = new Texture();
-
+	
+	
 	public void init(){
 		
 		WIDTH =  getWidth();
 		HEIGHT = getHeight();
 		
-		loader = new ImageLoader();
 		handler = new Handler(this);
 		camera = new Camera();
 		level1 = new Level1(handler);
@@ -39,7 +39,6 @@ public class Game extends Canvas implements Runnable{
 		//Add players and homing projectile to the beginning of the level
 		handler.addObject(player);
 		handler.addObject(new HomingMissle(-200, 500, player, ObjectId.HomingMissle));
-		
 		this.addKeyListener(new KeyInput(handler));
 	}
 	
@@ -127,7 +126,7 @@ public class Game extends Canvas implements Runnable{
 	}
 	
 	public static void main(String args[]){
-		new Window(1066,600,"Java Final Project", new Game());
+		new Window(1280, 720,"Java Final Project", new Game());
 	}
 	
 }

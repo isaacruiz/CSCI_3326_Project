@@ -25,6 +25,7 @@ public class Level1 {
 		int yy = 0;		//located relative to each other
 		float platVel = 3;
 
+		
 //		----------------------------First section of level----------------------------
 		//Introduction
 		yy += 600;

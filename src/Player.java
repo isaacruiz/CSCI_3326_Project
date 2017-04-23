@@ -8,8 +8,8 @@ import java.util.LinkedList;
 
 public class Player extends GameObject {
 
-	private float width = 48;
-	private float height = 48;
+	private float width = 64;
+	private float height = 64;
 	private float gravity = 0.5f;
 	private int health = 200;
 	private final float MAX_SPEED = 10;

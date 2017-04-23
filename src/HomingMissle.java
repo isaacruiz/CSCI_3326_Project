@@ -10,6 +10,7 @@ public class HomingMissle extends Projectile{
 	private Color color = Color.yellow;
 	private float velocity = 3f;
 	int toggle = 0;
+	double theta = 0;
 	
 	HomingMissle(float x, float y, Player p, ObjectId id){
 		super(x, y, id);

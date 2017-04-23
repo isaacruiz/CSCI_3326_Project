@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.geom.AffineTransform;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -13,6 +14,7 @@ public class Enemy extends GameObject{
 	int toggle = 0;
 	int counter = 0;
 	int fireRate;
+	float vpx, vpy;
 	protected boolean dynamicColor;
 	protected boolean projGravity = true;
 	
@@ -37,11 +39,11 @@ public class Enemy extends GameObject{
 		//Creates a projectile with a random trajectory and adds it to the handler
 		if (counter % fireRate == 0) {
 			
-			float vpx, vpy;
+			//float vpx, vpy;
 			vpx = rand.nextInt(20) - 10;
 			vpy = -1 * (rand.nextInt(15) + 10);
 			
-			Projectile p = new Projectile(x, y, vpx, vpy, color, ObjectId.Projectile);
+			Projectile p = new Projectile(x + 12, y + 12, vpx, vpy, color, ObjectId.Projectile);
 			handler.addObject(p);
 		}
 		toggle++;
@@ -50,16 +52,20 @@ public class Enemy extends GameObject{
 	
 	public void render(Graphics g) {
 		
-		Graphics2D g2d = (Graphics2D)g;
+//		Graphics2D g2d = (Graphics2D)g;
+//		
+//		g2d.setColor(Color.black);
+//		
+//		g.drawOval((int)x, (int)y - 20, width, height);
+//		g.drawRect((int)x, (int)y, width, height);
+//		
+//		g2d.setColor(color);
+//		g2d.fillOval((int)x, (int)y - 20, width, height);
+//		g2d.fillRect((int)x, (int)y, width, height);
 		
-		g2d.setColor(Color.black);
+		//g.drawImage(Texture.turret, (int)x, (int)y, null);
+		Texture.drawRotatedImage(Texture.turret, x, y, Math.atan(vpy/vpx), g);
 		
-		g.drawOval((int)x, (int)y - 20, width, height);
-		g.drawRect((int)x, (int)y, width, height);
-		
-		g2d.setColor(color);
-		g2d.fillOval((int)x, (int)y - 20, width, height);
-		g2d.fillRect((int)x, (int)y, width, height);
 	}
 	
 	public Rectangle getBounds() {
