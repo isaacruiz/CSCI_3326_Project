@@ -14,7 +14,9 @@ public class Enemy extends GameObject{
 	int toggle = 0;
 	int counter = 0;
 	int fireRate;
+	double fireAngle;
 	float vpx, vpy;
+	float projVel = 25;
 	protected boolean dynamicColor;
 	protected boolean projGravity = true;
 	
@@ -40,10 +42,12 @@ public class Enemy extends GameObject{
 		if (counter % fireRate == 0) {
 			
 			//float vpx, vpy;
-			vpx = rand.nextInt(20) - 10;
-			vpy = -1 * (rand.nextInt(15) + 10);
-			
-			Projectile p = new Projectile(x + 12, y + 12, vpx, vpy, color, ObjectId.Projectile);
+//			vpx = rand.nextInt(20) - 10;
+//			vpy = -1 * (rand.nextInt(15) + 10);
+			fireAngle = rand.nextDouble() * Math.PI/2 + Math.PI/4; //Creates a fire angle +- Pi/4 radians from vertical
+			vpx = (float)(projVel * Math.cos(fireAngle));
+			vpy = -1 * (float)(projVel * Math.sin(fireAngle));
+			Projectile p = new Projectile(x + 20, y + 20, vpx, vpy, color, ObjectId.Projectile);
 			handler.addObject(p);
 		}
 		toggle++;
@@ -64,7 +68,7 @@ public class Enemy extends GameObject{
 //		g2d.fillRect((int)x, (int)y, width, height);
 		
 		//g.drawImage(Texture.turret, (int)x, (int)y, null);
-		Texture.drawRotatedImage(Texture.turret, x, y, Math.atan(vpy/vpx), g);
+		Texture.drawRotatedImage(Texture.turret, x, y, -1 * fireAngle + Math.PI/2, g);
 		
 	}
 	

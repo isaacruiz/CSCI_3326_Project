@@ -38,7 +38,7 @@ public class Game extends Canvas implements Runnable{
 		
 		//Add players and homing projectile to the beginning of the level
 		handler.addObject(player);
-		handler.addObject(new HomingMissle(-200, 500, player, ObjectId.HomingMissle));
+		//handler.addObject(new HomingMissle(-200, 500, player, ObjectId.HomingMissle));
 		this.addKeyListener(new KeyInput(handler));
 	}
 	

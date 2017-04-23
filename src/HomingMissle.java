@@ -29,8 +29,13 @@ public class HomingMissle extends Projectile{
 	}
 
 	public void render(Graphics g) {
-		g.setColor(color);
-		g.fillOval((int)x,(int) y, (int)diameter, (int)diameter);
+//		g.setColor(color);
+//		g.fillOval((int)x,(int) y, (int)diameter, (int)diameter);
+		if(player.getX() < x)
+			Texture.drawRotatedImage(Texture.turret, x, y, theta - Math.PI/2, g);
+		
+		else
+			Texture.drawRotatedImage(Texture.turret, x, y, theta + Math.PI/2, g);
 	}
 
 	public Rectangle getBounds() {
@@ -58,7 +63,7 @@ public class HomingMissle extends Projectile{
 	}
 	
 	private void calcVelY(){
-		double theta;
+	
 		theta = Math.atan((player.getY() - y)/(player.getX() - x));
 		velY = velocity * (float)Math.sin(theta);
 		
