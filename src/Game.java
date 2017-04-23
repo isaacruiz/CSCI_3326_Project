@@ -17,7 +17,6 @@ public class Game extends Canvas implements Runnable{
 	Camera camera;
 	Player player;
 	HealthBar healthBar;
-	ImageLoader loader;
 	Level1 level1;
 	Texture texture = new Texture();
 	

@@ -12,6 +12,7 @@ public class Texture {
 	public static BufferedImage health = null;
 	public static BufferedImage instruction = null;
 	public static BufferedImage turret = null;
+	public static BufferedImage greenPlat = null;
 	private BufferedImage spriteSheet;
 	
 	public Texture(){
@@ -26,6 +27,7 @@ public class Texture {
 		instruction = loader.loadImage("Instructions.png");
 		turret = getSprite(1, 1, 64, 64);
 		//turret = loader.loadImage("/turret.png");
+		greenPlat = getSprite(2, 1, 64, 64);
 	
 	
 	}
