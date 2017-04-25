@@ -138,15 +138,15 @@ public class Level1 {
 		
 		xx += 400;
 		platVel = 5;
-		int moveRad = 200;
+		int moveRadius = 200;
 		for(int i = xx; i < 7200; i += 200){
 			p = new Platform(i, yy - 30, 62, 32, Color.yellow, ObjectId.Platform);
 			
 			if(i/200 % 2 == 0)
 				p.setColor(Color.green);
 			
-			p.setMovement(platVel, moveRad, 2);
-			p.setPosition(0, r.nextInt(moveRad) - moveRad/2);
+			p.setMovement(platVel, moveRadius, 2);
+			p.setPosition(0, r.nextInt(moveRadius) - moveRadius/2);
 			handler.addObject(p);
 		}
 //		----------------------------Last section of level----------------------------

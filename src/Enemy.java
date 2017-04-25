@@ -17,6 +17,7 @@ public class Enemy extends GameObject{
 	float vpx, vpy;
 	float projVel = 25;
 	protected boolean dynamicColor;
+	protected boolean randFireAngle = true;
 	protected boolean projGravity = true;
 	
 	Handler handler;
@@ -39,11 +40,15 @@ public class Enemy extends GameObject{
 		}
 		//Creates a projectile with a random trajectory and adds it to the handler
 		if (counter % fireRate == 0) {
-			
+			//Random firing velocity
 			//float vpx, vpy;
 //			vpx = rand.nextInt(20) - 10;
 //			vpy = -1 * (rand.nextInt(15) + 10);
-			fireAngle = rand.nextDouble() * Math.PI/2 + Math.PI/4; //Creates a fire angle +- Pi/4 radians from vertical
+			
+			//Random firing angle
+			if(randFireAngle)
+				fireAngle = rand.nextDouble() * Math.PI/2 + Math.PI/4; //Creates a fire angle +- Pi/4 radians from vertical
+			
 			vpx = (float)(projVel * Math.cos(fireAngle));
 			vpy = -1 * (float)(projVel * Math.sin(fireAngle));
 			Projectile p = new Projectile(x + 20, y + 20, vpx, vpy, color, ObjectId.Projectile);
@@ -97,5 +102,10 @@ public class Enemy extends GameObject{
 
 	public void setFireRate(int fr){
 		fireRate = fr;
+	}
+	
+	public void setFireAngle(double theta){
+		fireAngle = theta;
+		randFireAngle = false;
 	}
 }
