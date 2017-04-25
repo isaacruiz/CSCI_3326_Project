@@ -29,13 +29,9 @@ public class HomingMissle extends Projectile{
 	}
 
 	public void render(Graphics g) {
-//		g.setColor(color);
-//		g.fillOval((int)x,(int) y, (int)diameter, (int)diameter);
-		if(player.getX() < x)
-			Texture.drawRotatedImage(Texture.turret, x, y, theta - Math.PI/2, g);
-		
-		else
-			Texture.drawRotatedImage(Texture.turret, x, y, theta + Math.PI/2, g);
+		g.setColor(color);
+		g.fillOval((int)x,(int) y, (int)diameter, (int)diameter);
+
 	}
 
 	public Rectangle getBounds() {

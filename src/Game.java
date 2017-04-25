@@ -31,13 +31,12 @@ public class Game extends Canvas implements Runnable{
 		
 		level1.createLevel();
 		
-		//player = new Player(0, 500, handler, camera, ObjectId.Player);
-		player = new Player(4700, 500, handler, camera, ObjectId.Player);
+		player = new Player(0, 500, handler, camera, ObjectId.Player);
 		healthBar = new HealthBar(player);
 		
 		//Add players and homing projectile to the beginning of the level
 		handler.addObject(player);
-		//handler.addObject(new HomingMissle(-200, 500, player, ObjectId.HomingMissle));
+		handler.addObject(new HomingMissle(-200, 500, player, ObjectId.HomingMissle));
 		this.addKeyListener(new KeyInput(handler));
 	}
 	

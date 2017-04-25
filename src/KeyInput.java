@@ -25,11 +25,11 @@ public class KeyInput extends KeyAdapter {
 				Player p = (Player)tempObject;
 				if(key == KeyEvent.VK_D) p.setMoveRight(true);
 				if(key == KeyEvent.VK_A) p.setMoveLeft(true);
-				if(key == KeyEvent.VK_W && !tempObject.isJumping()){
+				if(key == KeyEvent.VK_SPACE && !tempObject.isJumping()){
 						tempObject.setJumping(true);
 						tempObject.setVelY(-13);
 				}	
-				if(key == KeyEvent.VK_SPACE) p.toggleColor();	
+				if(key == KeyEvent.VK_SHIFT) p.toggleColor();	
 			}	
 		}
 		if(key == KeyEvent.VK_ESCAPE)

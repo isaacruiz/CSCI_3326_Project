@@ -41,17 +41,17 @@ public class Level1 {
 		
 		//Up-down platform
 		xx -= 384;
-		p = new Platform(xx, yy - 230, 200, 32, Color.gray, ObjectId.Platform);
+		p = new Platform(xx, yy - 230, 224, 32, Color.gray, ObjectId.Platform);
 		p.setMovement(platVel, 234, 2);
 		p.setPosition(0, -200);
 		handler.addObject(p);
 		
-		xx += 216;
+		xx += 230;
 		addFloor(xx, 132, 128);
 		
 		//Diagonal Platform
 		xx += 360;
-		p = new Platform(xx, yy - 230, 180, 32, Color.gray, ObjectId.Platform);
+		p = new Platform(xx, yy - 230, 192, 32, Color.gray, ObjectId.Platform);
 		p.setMovement(platVel, 234, 3);
 		handler.addObject(p);
 		
@@ -61,7 +61,7 @@ public class Level1 {
 		addFloor(xx, yy, 160);
 		xx = 2600;
 		
-		p = new Platform(xx, yy, 100, 32, Color.green, ObjectId.Platform);
+		p = new Platform(xx, yy, 96, 32, Color.green, ObjectId.Platform);
 		p.setMovement(platVel, 150, 1);
 		p.setPosition(-150, 0);
 		handler.addObject(p);
@@ -70,14 +70,14 @@ public class Level1 {
 		handler.addObject(e);
 		
 		xx += 500;
-		p = new Platform(xx, yy, 100, 32, Color.yellow, ObjectId.Platform);
+		p = new Platform(xx, yy, 96, 32, Color.yellow, ObjectId.Platform);
 		p.setPosition(150, 0);
 		p.setMovement(3, 150, 1);
 		
 		handler.addObject(p);
 		
 		xx += 500;
-		p = new Platform(xx, yy, 100, 32, Color.green, ObjectId.Platform);
+		p = new Platform(xx, yy, 96, 32, Color.green, ObjectId.Platform);
 		p.setMovement(platVel, 150, 1);
 		p.setPosition(-150, 0);
 		handler.addObject(p);
@@ -86,7 +86,7 @@ public class Level1 {
 		handler.addObject(e);
 		
 		xx += 500;
-		p = new Platform(xx, yy, 100, 32, Color.yellow, ObjectId.Platform);
+		p = new Platform(xx, yy, 96, 32, Color.yellow, ObjectId.Platform);
 		p.setMovement(platVel, 150, 1);
 		p.setPosition(150, 0);
 		handler.addObject(p);
@@ -96,32 +96,32 @@ public class Level1 {
 		addFloor(xx, yy - 50, 300);
 
 		xx += 600;
-		e = new EnemyB(xx, yy - 50, handler, Color.green, true, ObjectId.Enemy);
+		e = new EnemyB(xx + 50, yy - 50, handler, Color.green, true, ObjectId.Enemy);
 		e.toggleProjGrav();
 		handler.addObject(e);
 		
-		p = new Platform(xx, yy - 50, 150, 32, Color.yellow, ObjectId.Platform);
+		p = new Platform(xx, yy - 50, 160, 32, Color.yellow, ObjectId.Platform);
 		p.setMovement(platVel, 250, 4);
 		p.setPosition(150, 150);
 		p.setVelX(platVel);
 		p.setVelY(-platVel);
 		handler.addObject(p);
 		
-		p = new Platform(xx, yy - 50, 150, 32, Color.yellow, ObjectId.Platform);
+		p = new Platform(xx, yy - 50, 160, 32, Color.yellow, ObjectId.Platform);
 		p.setMovement(platVel, 250, 4);
 		p.setPosition(-150, -150);
 		p.setVelX(-platVel);
 		p.setVelY(platVel);
 		handler.addObject(p);
 		
-		p = new Platform(xx, yy - 50, 150, 32, Color.green, ObjectId.Platform);
+		p = new Platform(xx, yy - 50, 160, 32, Color.green, ObjectId.Platform);
 		p.setMovement(platVel, 250, 4);
 		p.setPosition(-150, 150);
 		p.setVelX(platVel);
 		p.setVelY(platVel);
 		handler.addObject(p);
 		
-		p = new Platform(xx, yy - 50, 150, 32, Color.green, ObjectId.Platform);
+		p = new Platform(xx, yy - 50, 160, 32, Color.green, ObjectId.Platform);
 		p.setMovement(platVel, 250, 4);
 		p.setPosition(150, -150);
 		p.setVelX(-platVel);
@@ -140,7 +140,7 @@ public class Level1 {
 		platVel = 5;
 		int moveRad = 200;
 		for(int i = xx; i < 7200; i += 200){
-			p = new Platform(i, yy - 30, 50, 32, Color.yellow, ObjectId.Platform);
+			p = new Platform(i, yy - 30, 62, 32, Color.yellow, ObjectId.Platform);
 			
 			if(i/200 % 2 == 0)
 				p.setColor(Color.green);
@@ -154,7 +154,7 @@ public class Level1 {
 		xx = 7200;
 		yy = 400;
 		for(int i = 0; i < 5; i++){
-			p = new Platform(xx, yy, 100, 32, Color.green, ObjectId.Platform);
+			p = new Platform(xx, yy, 96, 32, Color.green, ObjectId.Platform);
 			
 			if(i % 2 == 0)
 				p.setColor(Color.yellow);

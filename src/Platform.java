@@ -40,6 +40,7 @@ public class Platform extends GameObject {
 		x += velX;
 		y += velY;
 
+		//Bounds platform movement within a certain area
 		if(x + width > rbMove || x < lbMove)
 			velX *= -1;
 		
@@ -53,11 +54,15 @@ public class Platform extends GameObject {
 	}
 
 	public void render(Graphics g) {
+
+//		Render with Java Graphics
 //		g.setColor(color);
 //		g.fillRect((int) x, (int) y, (int)width, (int)height);
 //		
 //		g.setColor(Color.black);
 //		g.drawRect((int)x, (int) y, (int)width, (int)height);
+		
+//		Render with image from sprite sheet
 		if(color == Color.green){
 			for(int i = (int)x; i < (int)(x + width); i += 32){
 				g.drawImage(Texture.greenBlock, (int)i, (int)y, null);
