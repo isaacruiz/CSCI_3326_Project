@@ -59,19 +59,27 @@ public class Platform extends GameObject {
 //		g.setColor(Color.black);
 //		g.drawRect((int)x, (int) y, (int)width, (int)height);
 		if(color == Color.green){
-		for(int i = (int)x; i < (int)(x + width); i += 32){
-			g.drawImage(Texture.greenBlock, (int)i, (int)y, null);
-		}
+			for(int i = (int)x; i < (int)(x + width); i += 32){
+				g.drawImage(Texture.greenBlock, (int)i, (int)y, null);
+			}
 		}
 		
-		if (color == Color.yellow){
+		else if (color == Color.yellow){
 			for(int i = (int)x; i < (int)(x + width); i += 32){
 				g.drawImage(Texture.yellowBlock, (int)i, (int)y, null);
 			}
 		}
 		
-		g.setColor(Color.red);
-		g.drawRect((int)x, (int)y, (int)width, (int)height);
+		else if (color == Color.gray){
+			for(int i = (int)x; i < (int)(x + width); i += 32){
+				g.drawImage(Texture.grayBlock, (int)i, (int)y, null);
+			}
+		}
+		
+		
+		
+//		g.setColor(Color.red);
+//		g.drawRect((int)x, (int)y, (int)width, (int)height);
 		
 //		-----------------------Platform movement boundaries------------------------
 //		g.setColor(Color.red);

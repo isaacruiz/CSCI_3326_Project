@@ -14,6 +14,7 @@ public class Texture {
 	public static BufferedImage turret = null;
 	public static BufferedImage greenBlock = null;
 	public static BufferedImage yellowBlock = null;
+	public static BufferedImage grayBlock = null;
 	public static BufferedImage greenProj = null;
 	public static BufferedImage yellowProj = null;
 	public static BufferedImage greenEnemy = null;
@@ -24,7 +25,6 @@ public class Texture {
 	
 		ImageLoader loader = new ImageLoader();
 		spriteSheet = loader.loadImage("SpriteSheet.png");
-		//block = loader.loadImage("GrayBrick.png");
 		background = loader.loadImage("trees3.png");
 		complete = loader.loadImage("level_complete.png");
 		startmsg = loader.loadImage("escape_the_missle.png");
@@ -34,6 +34,7 @@ public class Texture {
 		yellowEnemy = getSprite(1, 2, 64, 64);
 		greenBlock = getSprite(3, 1, 32, 32);
 		yellowBlock = getSprite(3, 2, 32, 32);
+		grayBlock = getSprite(4, 1, 32, 32);
 		greenProj = getSprite(3, 3, 32, 32);
 		yellowProj = getSprite(3, 4, 32, 32);
 	

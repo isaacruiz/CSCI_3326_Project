@@ -37,14 +37,14 @@ public class Projectile extends GameObject{
 
 	public void render(Graphics g) {
 		
-		g.setColor(color);
-		g.fillOval((int)x, (int)y, (int)diameter, (int)diameter);
-//		if(color == Color.green){
-//		g.drawImage(Texture.greenProj,  (int)x, (int)y, null);
-//		}
-//		else if (color == Color.yellow){
-//			g.drawImage(Texture.yellowProj, (int)x, (int)y, null);
-//		}
+//		g.setColor(color);
+//		g.fillOval((int)x, (int)y, (int)diameter, (int)diameter);
+		if(color == Color.green){
+		g.drawImage(Texture.greenProj,  (int)x, (int)y, null);
+		}
+		else if (color == Color.yellow){
+			g.drawImage(Texture.yellowProj, (int)x, (int)y, null);
+		}
 //		g.setColor(Color.red);
 //		Graphics2D g2d = (Graphics2D)g;
 //		g2d.draw(getBounds());
